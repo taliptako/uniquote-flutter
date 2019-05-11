@@ -4,14 +4,15 @@ import 'package:uniquote/models/tag_model.dart';
 
 class TagApi {
   DB _db = DB();
+  static const String table = "tags";
 
   Future<Tag> fetchTag(int id) async {
-    var body = await _db.get('tag$id');
+    var body = await _db.get(table, 'tag$id');
 
     if (body == false) {
       final r = await dio.get('tag/$id');
       body = r.data;
-      _db.set('tag$id', body);
+      _db.set(table, 'tag$id', body);
     }
 
     final json = _db.decode(body);
@@ -20,12 +21,12 @@ class TagApi {
   }
 
   Future<List<Tag>> fetchFollowedTags() async {
-    var body = await _db.get('f_tags');
+    var body = await _db.get(table, 'f_tags');
 
     if (body == false) {
       final r = await dio.get('tag/followed');
       body = r.data;
-      _db.set('f_tags', body);
+      _db.set(table, 'f_tags', body);
     }
 
     final json = _db.decode(body);
@@ -34,12 +35,12 @@ class TagApi {
   }
 
   Future<List<Tag>> fetchUnFollowedTags() async {
-    var body = await _db.get('uf_tags');
+    var body = await _db.get(table, 'uf_tags');
 
     if (body == false) {
       final r = await dio.get('tag/unfollowed');
       body = r.data;
-      _db.set('uf_tags', body);
+      _db.set(table, 'uf_tags', body);
     }
 
     final json = _db.decode(body);
@@ -50,8 +51,8 @@ class TagApi {
   Future<bool> follow(int tagId) async {
     try {
       await dio.put('tag/$tagId/follow');
-      _db.remove('f_tags');
-      _db.remove('uf_tags');
+      _db.remove(table, 'f_tags');
+      _db.remove(table, 'uf_tags');
       return true;
     } catch (e) {
       return false;
@@ -61,8 +62,8 @@ class TagApi {
   Future<bool> unFollow(int tagId) async {
     try {
       await dio.put('tag/$tagId/unfollow');
-      _db.remove('f_tags');
-      _db.remove('uf_tags');
+      _db.remove(table, 'f_tags');
+      _db.remove(table, 'uf_tags');
       return true;
     } catch (e) {
       return false;

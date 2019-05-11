@@ -4,14 +4,15 @@ import 'package:uniquote/models/quote_store.dart';
 
 class QuoteApi {
   DB _db = DB();
+  static const String table = "quotes";
 
   Future fetchFeed(int page) async {
-    var body = await _db.get('feed$page');
+    var body = await _db.get(table, 'feed$page');
 
     if (body == false) {
       final r = await dio.get('home?page=$page');
-      body = r.data;
-      _db.set('feed$page', body);
+      final body = r.data;
+      _db.set(table, 'feed$page', body);
     }
 
     final json = _db.decode(body);
@@ -22,13 +23,12 @@ class QuoteApi {
   }
 
   Future fetchMostLiked(int page) async {
-    var body = await _db.get('most_liked$page');
+    var body = await _db.get(table, 'most_liked$page');
 
     if (body == false) {
-      print('tekrar çekiyor');
       final r = await dio.get('quote/most_liked?page=$page');
-      body = r.data;
-      _db.set('most_liked$page', body);
+      final body = r.data;
+      _db.set(table, 'most_liked$page', body);
     }
 
     final json = _db.decode(body);
@@ -41,7 +41,6 @@ class QuoteApi {
   Future<bool> interact(String type, int id) async {
     try {
       await dio.put('quote/$id/$type');
-      _db.clear();
       return true;
     } catch (e) {
       return false;

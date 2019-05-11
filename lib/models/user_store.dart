@@ -10,7 +10,6 @@ class UserStore = AbstractUserStore with _$UserStore;
 
 // The store-class
 abstract class AbstractUserStore implements Store {
-
   final int id;
   final String name;
   final String email;
@@ -48,6 +47,18 @@ abstract class AbstractUserStore implements Store {
       this.isFollowed,
       this.professions});
 
+  @observable
+  bool isFollowed;
+
+  @observable
+  int followerCount;
+
+  @observable
+  int followingCount;
+
+  @observable
+  int quoteCount;
+
   static UserStore fromJson(Map<String, dynamic> json) {
     return UserStore(
         id: json['id'],
@@ -67,7 +78,8 @@ abstract class AbstractUserStore implements Store {
         followingCount:
             json['following_count'] != null ? json['following_count'] : 0,
         quoteCount: json['quote_count'] != null ? json['quote_count'] : 0,
-        favoriteCount: json['favorite_count'] != null ? json['favorite_count'] : 0,
+        favoriteCount:
+            json['favorite_count'] != null ? json['favorite_count'] : 0,
         isFollowed: json['isFollowed'] != null ? json['isFollowed'] : false,
         professions: json['professions'] != null
             ? json['professions']
@@ -75,17 +87,4 @@ abstract class AbstractUserStore implements Store {
                 .toList()
             : null);
   }
-
-  @observable
-  bool isFollowed;
-
-  @observable
-  int followerCount;
-
-  @observable
-  int followingCount;
-
-  @observable
-  int quoteCount;
-
 }

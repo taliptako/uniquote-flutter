@@ -10,6 +10,7 @@ class Home extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        drawer: DrawerWidget(),
         bottomNavigationBar: BottomNavigation(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},

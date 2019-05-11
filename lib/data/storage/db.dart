@@ -1,32 +1,35 @@
 import 'dart:convert';
 
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:frideos_kvprx/frideos_kvprx.dart';
 
 class DB {
-  Future get(String key) async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<KeyValueProvider> kvpDb(String table) async {
+    final dbProvider = DbProvider();
+    await dbProvider.init();
+    final kvpDb = KeyValueProvider(dbProvider: dbProvider, table: table);
+    await kvpDb.init();
+    return kvpDb;
+  }
 
-    if (prefs.containsKey(key)) {
-      return prefs.getString(key);
+  Future get(String table, String key) async {
+    final kvp = await kvpDb(table);
+    final kv = await kvp.getByKey(key);
+
+    if (kv.value.isNotEmpty) {
+      return kv.value;
     }
     return false;
   }
 
-  Future set(String key, String value) async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<bool> set(String table, String key, String value) async {
+    final kvp = await kvpDb(table);
 
-    return prefs.setString(key, value);
+    return await kvp.insertKeyValue(key, value);
   }
 
-  Future remove(String key) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    return prefs.remove(key);
-  }
-
-  Future clear() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+  Future remove(String table, String key) async {
+    final kvp = await kvpDb(table);
+    await kvp.deleteByKey(key);
   }
 
   decode(String data) {
