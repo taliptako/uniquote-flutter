@@ -41,6 +41,7 @@ class QuoteApi {
   Future<bool> interact(String type, int id) async {
     try {
       await dio.put('quote/$id/$type');
+      _db.truncateTable(table);
       return true;
     } catch (e) {
       return false;

@@ -4,6 +4,7 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:validators/validators.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
+import 'package:uniquote/components/progress.dart';
 import 'package:uniquote/screens/auth/register/register_title.dart';
 import 'package:uniquote/screens/auth/register/register_bottom.dart';
 import 'package:uniquote/controllers/auth_controller.dart';
@@ -65,7 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               callback: () async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
-
+                  Progress.show(context);
                   final result = await _authController.register(
                       _name, _email, _password, _passwordC);
                   if (result == true) {

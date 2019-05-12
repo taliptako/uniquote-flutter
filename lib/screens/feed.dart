@@ -6,6 +6,7 @@ import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:uniquote/config/sl.dart';
 import 'package:uniquote/stores/feed_store.dart';
 import 'package:uniquote/widgets/quote/quote_widget.dart';
+import 'package:uniquote/widgets/quote/bottom_loader.dart';
 
 class Feed extends StatefulWidget {
   @override
@@ -41,11 +42,14 @@ class _FeedState extends State<Feed> {
           onRefresh: () async {
             await _feedStore.refresh();
           },
+
           child: ListView.builder(
             controller: _scrollController,
             itemCount: _feedStore.quotes.length,
             itemBuilder: (context, index) {
-              return QuoteWidget(_feedStore.quotes[index]);
+              return index+1 >= _feedStore.quotes.length
+                  ? BottomLoader()
+                  : QuoteWidget(_feedStore.quotes[index]);
             },
           ),
         );
