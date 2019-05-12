@@ -11,8 +11,8 @@ class QuoteApi {
 
     if (body == false) {
       final r = await dio.get('home?page=$page');
-      final body = r.data;
-      _db.set(table, 'feed$page', body);
+      body = r.data;
+      await _db.set(table, 'feed$page', body);
     }
 
     final json = _db.decode(body);
@@ -27,7 +27,7 @@ class QuoteApi {
 
     if (body == false) {
       final r = await dio.get('quote/most_liked?page=$page');
-      final body = r.data;
+      body = r.data;
       _db.set(table, 'most_liked$page', body);
     }
 

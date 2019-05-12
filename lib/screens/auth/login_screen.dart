@@ -73,9 +73,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(fontSize: 17),
               ),
               callback: () async {
-                Progress.show(context);
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
+                  Progress.show(context);
 
                   final result =
                       await _authController.emailLogin(_email, _password);

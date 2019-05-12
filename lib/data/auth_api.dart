@@ -29,4 +29,22 @@ class AuthApi {
       return false;
     }
   }
+
+  Future register(String name, String email, String password,
+      String passwordConfirmation) async {
+    try {
+      final r = await dio.post('auth/register', data: {
+        'name': name,
+        'email': email,
+        'password': password,
+        'password_confirmation': passwordConfirmation
+      });
+
+      final json = jsonDecode(r.data);
+
+      return AbstractUserStore.fromJson(json['data']);
+    } on DioError catch (e) {
+      return false;
+    }
+  }
 }

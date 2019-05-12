@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:uniquote/scaffolds/home.dart';
 import 'package:uniquote/scaffolds/tag.dart';
-import 'package:uniquote/scaffolds/login.dart';
 import 'package:uniquote/screens/auth/auth_check.dart';
+import 'package:uniquote/scaffolds/register.dart';
+import 'package:uniquote/scaffolds/login.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
 
     switch (settings.name) {
-
       case '/auth_check':
         return MaterialPageRoute(builder: (_) => AuthCheck());
+
+      case '/register':
+        return MaterialPageRoute(builder: (_) => Register());
 
       case '/login':
         return MaterialPageRoute(builder: (_) => Login());

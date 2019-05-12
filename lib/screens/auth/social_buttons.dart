@@ -27,8 +27,8 @@ class SocialButtons extends StatelessWidget {
             borderRadius: BorderRadius.circular(30.0),
             child: Icon(GroovinMaterialIcons.google, color: Colors.deepPurple),
           ),
-          height: 56.0,
-          width: 56.0,
+          height: 58.0,
+          width: 58.0,
           decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(color: Colors.grey, width: 0.5)),

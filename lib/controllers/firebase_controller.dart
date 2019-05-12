@@ -23,13 +23,17 @@ class FirebaseController {
         email: email, password: password);
   }
 
+  Future emailRegister(String email, String password) async {
+    return await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+  }
+
   Future check() async {
     final FirebaseUser user = await _auth.currentUser();
 
-
-    if(user == null) {
+    if (user == null) {
       return false;
-    }else {
+    } else {
       return true;
     }
   }

@@ -14,6 +14,15 @@ class AuthController {
   final FirebaseController _firebaseController = FirebaseController();
   final AuthApi _authApi = AuthApi();
 
+  Future register(name, email, password, passwordConfirmation) async {
+    final result =
+        await _authApi.register(name, email, password, passwordConfirmation);
+    if (result is UserStore) {
+      await _firebaseController.emailRegister(email, password);
+      return loginProcess(result);
+    }
+  }
+
   Future<bool> googleLogin() async {
     FirebaseUser user = await _firebaseController.googleLogin();
 
@@ -52,6 +61,11 @@ class AuthController {
         .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
   }
 
+  void registerPush(BuildContext context) {
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/register', (Route<dynamic> route) => false);
+  }
+
   Future check() async {
     return await _firebaseController.check();
   }
@@ -62,5 +76,4 @@ class AuthController {
     _rootStore.user = null;
     return true;
   }
-
 }

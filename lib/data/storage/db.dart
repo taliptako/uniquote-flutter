@@ -15,7 +15,7 @@ class DB {
     final kvp = await kvpDb(table);
     final kv = await kvp.getByKey(key);
 
-    if (kv.value.isNotEmpty) {
+    if (kv != null) {
       return kv.value;
     }
     return false;
@@ -25,6 +25,11 @@ class DB {
     final kvp = await kvpDb(table);
 
     return await kvp.insertKeyValue(key, value);
+  }
+
+  Future truncateTable(String table) async {
+    final kvp = await kvpDb(table);
+    await kvp.truncate();
   }
 
   Future remove(String table, String key) async {
