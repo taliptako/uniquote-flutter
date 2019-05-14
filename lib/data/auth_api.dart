@@ -6,16 +6,16 @@ import 'package:dio/dio.dart';
 import 'package:uniquote/models/user_store.dart';
 
 class AuthApi {
-  Future socialLogin(
-      String idToken, String email, String name, String isVerified) async {
+  Future socialLogin({
+      String idToken, String email, String name, String isVerified}) async {
     Map data = {"id_token": idToken};
-    if (email.isNotEmpty) {
+    if (email != null) {
       data.addAll({"email": email});
     }
-    if (name.isNotEmpty) {
+    if (name != null) {
       data.addAll({"name": name});
     }
-    if (isVerified.isNotEmpty) {
+    if (isVerified != null) {
       data.addAll({"is_verified": isVerified});
     }
 

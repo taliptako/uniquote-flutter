@@ -51,8 +51,7 @@ class TagApi {
   Future<bool> follow(int tagId) async {
     try {
       await dio.put('tag/$tagId/follow');
-      _db.remove(table, 'f_tags');
-      _db.remove(table, 'uf_tags');
+      _db.truncateTable(table);
       return true;
     } catch (e) {
       return false;
@@ -62,8 +61,7 @@ class TagApi {
   Future<bool> unFollow(int tagId) async {
     try {
       await dio.put('tag/$tagId/unfollow');
-      _db.remove(table, 'f_tags');
-      _db.remove(table, 'uf_tags');
+      _db.truncateTable(table);
       return true;
     } catch (e) {
       return false;

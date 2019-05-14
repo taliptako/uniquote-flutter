@@ -11,10 +11,10 @@ class _AuthCheckState extends State<AuthCheck> {
   final AuthController _authController = AuthController();
 
   Future check() async {
-    if(await _authController.check()) {
+    if (await _authController.check()) {
       _authController.successPush(context);
     } else {
-      await _authController.logoutPush(context);
+      _authController.logoutPush(context);
     }
   }
 

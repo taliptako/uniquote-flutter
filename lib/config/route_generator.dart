@@ -5,6 +5,8 @@ import 'package:uniquote/scaffolds/tag.dart';
 import 'package:uniquote/screens/auth/auth_check.dart';
 import 'package:uniquote/scaffolds/register.dart';
 import 'package:uniquote/scaffolds/login.dart';
+import 'package:uniquote/scaffolds/tag_list.dart';
+import 'package:uniquote/scaffolds/favorites.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -25,6 +27,15 @@ class RouteGenerator {
 
       case '/1':
         return MaterialPageRoute(builder: (_) => Tag());
+
+      case '/favorites':
+        return MaterialPageRoute(builder: (_) => Favorites());
+
+      case '/tag_list':
+        return MaterialPageRoute(
+            builder: (_) => TagList(
+                  tag: args,
+                ));
 
       default:
         return _errorRoute();

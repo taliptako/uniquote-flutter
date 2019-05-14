@@ -15,9 +15,9 @@ class BottomNavigation extends StatelessWidget {
       onItemSelected: (index) {
         if (index == 3) {
           rootStore.changeBottomNav(3);
-
         } else {
           rootStore.changeBottomNav(index);
+          Navigator.pushReplacementNamed(context, '/$index');
         }
       },
       items: [

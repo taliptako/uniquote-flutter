@@ -18,19 +18,21 @@ class ProfileRow extends StatelessWidget {
       child: Row(
         children: <Widget>[
           _avatar(),
-          Container(
-              margin: EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('${quote.user.name}',
-                      style: TextStyle(
-                        fontSize: 21,
-                        fontWeight: FontWeight.w500,
-                      )),
-                  _professions()
-                ],
-              )),
+          Expanded(
+            child: Container(
+                margin: EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('${quote.user.name}',
+                        style: TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.w500,
+                        )),
+                    _professions()
+                  ],
+                )),
+          ),
         ],
       ),
     );
@@ -88,4 +90,3 @@ class ProfileRow extends StatelessWidget {
     }
   }
 }
-

@@ -9,6 +9,21 @@ part of 'root_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$RootStore on _RootStore, Store {
+  final _$userAtom = Atom(name: '_RootStore.user');
+
+  @override
+  UserStore get user {
+    _$userAtom.reportObserved();
+    return super.user;
+  }
+
+  @override
+  set user(UserStore value) {
+    _$userAtom.context.checkIfStateModificationsAreAllowed(_$userAtom);
+    super.user = value;
+    _$userAtom.reportChanged();
+  }
+
   final _$bottomNavAtom = Atom(name: '_RootStore.bottomNav');
 
   @override

@@ -26,8 +26,11 @@ class AuthController {
   Future<bool> googleLogin() async {
     FirebaseUser user = await _firebaseController.googleLogin();
 
-    final result = await _authApi.socialLogin(await user.getIdToken(),
-        user.email, user.displayName, user.isEmailVerified.toString());
+    final result = await _authApi.socialLogin(
+        idToken: await user.getIdToken(),
+        email: user.email,
+        name: user.displayName,
+        isVerified: user.isEmailVerified.toString());
 
     return loginProcess(result);
   }
@@ -35,8 +38,7 @@ class AuthController {
   Future<bool> emailLogin(String email, String password) async {
     FirebaseUser user = await _firebaseController.emailLogin(email, password);
 
-    final result = await _authApi.socialLogin(await user.getIdToken(),
-        user.email, user.displayName, user.isEmailVerified.toString());
+    final result = await _authApi.socialLogin(idToken: await user.getIdToken());
     return await loginProcess(result);
   }
 
@@ -67,7 +69,15 @@ class AuthController {
   }
 
   Future check() async {
-    return await _firebaseController.check();
+    var user = await _firebaseController.check();
+
+    if (user is FirebaseUser) {
+      final result =
+          await _authApi.socialLogin(idToken: await user.getIdToken());
+      return await loginProcess(result);
+    } else {
+      return false;
+    }
   }
 
   Future<bool> logout() async {

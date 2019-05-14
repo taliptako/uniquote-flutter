@@ -34,7 +34,7 @@ class FirebaseController {
     if (user == null) {
       return false;
     } else {
-      return true;
+      return user;
     }
   }
 
