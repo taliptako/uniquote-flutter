@@ -1,5 +1,7 @@
 import 'package:mobx/mobx.dart';
 
+import 'package:uniquote/config/sl.dart';
+import 'package:uniquote/stores/root_store.dart';
 import 'package:uniquote/models/user_store.dart';
 import 'package:uniquote/data/quote_api.dart';
 
@@ -12,6 +14,7 @@ class QuoteStore = AbstractQuoteStore with _$QuoteStore;
 // The store-class
 abstract class AbstractQuoteStore implements Store {
   final QuoteApi _quoteApi = QuoteApi();
+  final RootStore _rootStore = sl<RootStore>();
 
   AbstractQuoteStore(
       {this.id,
@@ -48,20 +51,24 @@ abstract class AbstractQuoteStore implements Store {
   @action
   favorite() async {
     hasFavorited = true;
+    _rootStore.user.favoriteCount++;
     bool result = await _quoteApi.interact('favorite', id);
     if (!result) {
       error = "Quote ID: $id Error occurred during favorite process";
       hasFavorited = false;
+      _rootStore.user.favoriteCount--;
     }
   }
 
   @action
   unFavorite() async {
     hasFavorited = false;
+    _rootStore.user.favoriteCount--;
     bool result = await _quoteApi.interact('unfavorite', id);
     if (!result) {
       error = "Quote ID: $id Error occurred during unFavorite process";
       hasFavorited = true;
+      _rootStore.user.favoriteCount++;
     }
   }
 

@@ -9,6 +9,22 @@ part of 'user_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$UserStore on AbstractUserStore, Store {
+  final _$favoriteCountAtom = Atom(name: 'AbstractUserStore.favoriteCount');
+
+  @override
+  int get favoriteCount {
+    _$favoriteCountAtom.reportObserved();
+    return super.favoriteCount;
+  }
+
+  @override
+  set favoriteCount(int value) {
+    _$favoriteCountAtom.context
+        .checkIfStateModificationsAreAllowed(_$favoriteCountAtom);
+    super.favoriteCount = value;
+    _$favoriteCountAtom.reportChanged();
+  }
+
   final _$isFollowedAtom = Atom(name: 'AbstractUserStore.isFollowed');
 
   @override

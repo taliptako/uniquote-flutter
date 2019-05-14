@@ -23,8 +23,6 @@ abstract class AbstractUserStore implements Store {
   final String password;
   final String apiToken;
 
-  final int favoriteCount;
-
   final List professions;
 
   AbstractUserStore(
@@ -46,6 +44,9 @@ abstract class AbstractUserStore implements Store {
       this.favoriteCount,
       this.isFollowed,
       this.professions});
+
+  @observable
+  int favoriteCount;
 
   @observable
   bool isFollowed;
