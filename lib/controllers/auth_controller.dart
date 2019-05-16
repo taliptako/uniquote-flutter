@@ -17,6 +17,7 @@ class AuthController {
   Future register(name, email, password, passwordConfirmation) async {
     final result =
         await _authApi.register(name, email, password, passwordConfirmation);
+    print(result);
     if (result is UserStore) {
       await _firebaseController.emailRegister(email, password);
       return loginProcess(result);
@@ -26,11 +27,8 @@ class AuthController {
   Future<bool> googleLogin() async {
     FirebaseUser user = await _firebaseController.googleLogin();
 
-    final result = await _authApi.socialLogin(
-        idToken: await user.getIdToken(),
-        email: user.email,
-        name: user.displayName,
-        isVerified: user.isEmailVerified.toString());
+    print(user.uid);
+    final result = await _authApi.socialLogin(await user.getIdToken());
 
     return loginProcess(result);
   }
@@ -38,14 +36,14 @@ class AuthController {
   Future<bool> emailLogin(String email, String password) async {
     FirebaseUser user = await _firebaseController.emailLogin(email, password);
 
-    final result = await _authApi.socialLogin(idToken: await user.getIdToken());
+    final result = await _authApi.socialLogin(await user.getIdToken());
     return await loginProcess(result);
   }
 
   Future<bool> loginProcess(result) async {
     if (result is UserStore) {
       _rootStore.user = result;
-      dio.options.headers = {'Authorization': 'Bearer ' + result.apiToken};
+      dio.options.headers = {'Authorization': 'Bearer ${result.apiToken}'};
       return true;
     } else {
       await logout();
@@ -73,7 +71,7 @@ class AuthController {
 
     if (user is FirebaseUser) {
       final result =
-          await _authApi.socialLogin(idToken: await user.getIdToken());
+          await _authApi.socialLogin(await user.getIdToken());
       return await loginProcess(result);
     } else {
       return false;

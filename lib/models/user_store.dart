@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 
 import 'package:uniquote/models/profession_model.dart';
+import 'package:uniquote/data/user_api.dart';
 
 // Include generated file
 part 'user_store.g.dart';
@@ -10,6 +11,8 @@ class UserStore = AbstractUserStore with _$UserStore;
 
 // The store-class
 abstract class AbstractUserStore implements Store {
+  final UserApi _userApi = UserApi();
+
   final int id;
   final String name;
   final String email;
@@ -59,6 +62,26 @@ abstract class AbstractUserStore implements Store {
 
   @observable
   int quoteCount;
+
+  @action
+  follow() async {
+    isFollowed = true;
+    final bool result = await _userApi.followUser(id);
+
+    if (!result) {
+      isFollowed = false;
+    }
+  }
+
+  @action
+  unFollow() async {
+    isFollowed = false;
+    final bool result = await _userApi.unFollowUser(id);
+
+    if (!result) {
+      isFollowed = true;
+    }
+  }
 
   static UserStore fromJson(Map<String, dynamic> json) {
     return UserStore(

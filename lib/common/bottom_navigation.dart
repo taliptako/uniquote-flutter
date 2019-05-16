@@ -11,7 +11,7 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavyBar(
-      currentIndex: rootStore.bottomNav,
+      selectedIndex: rootStore.bottomNav,
       onItemSelected: (index) {
         if (index == 3) {
           rootStore.changeBottomNav(3);

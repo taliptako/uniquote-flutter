@@ -6,21 +6,10 @@ import 'package:dio/dio.dart';
 import 'package:uniquote/models/user_store.dart';
 
 class AuthApi {
-  Future socialLogin({
-      String idToken, String email, String name, String isVerified}) async {
-    Map data = {"id_token": idToken};
-    if (email != null) {
-      data.addAll({"email": email});
-    }
-    if (name != null) {
-      data.addAll({"name": name});
-    }
-    if (isVerified != null) {
-      data.addAll({"is_verified": isVerified});
-    }
-
+  Future socialLogin(String idToken) async {
     try {
-      final r = await dio.post('auth/social_login', data: data);
+      final r =
+          await dio.post('auth/social_login', data: {'id_token': idToken});
 
       final json = jsonDecode(r.data);
 
@@ -33,6 +22,10 @@ class AuthApi {
   Future register(String name, String email, String password,
       String passwordConfirmation) async {
     try {
+      print(name);
+      print(email);
+      print(password);
+      print(passwordConfirmation);
       final r = await dio.post('auth/register', data: {
         'name': name,
         'email': email,
@@ -41,6 +34,8 @@ class AuthApi {
       });
 
       final json = jsonDecode(r.data);
+
+      print(json);
 
       return AbstractUserStore.fromJson(json['data']);
     } on DioError catch (e) {

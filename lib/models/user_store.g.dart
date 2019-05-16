@@ -88,4 +88,18 @@ mixin _$UserStore on AbstractUserStore, Store {
     super.quoteCount = value;
     _$quoteCountAtom.reportChanged();
   }
+
+  final _$followAsyncAction = AsyncAction('follow');
+
+  @override
+  Future follow() {
+    return _$followAsyncAction.run(() => super.follow());
+  }
+
+  final _$unFollowAsyncAction = AsyncAction('unFollow');
+
+  @override
+  Future unFollow() {
+    return _$unFollowAsyncAction.run(() => super.unFollow());
+  }
 }
