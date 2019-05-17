@@ -3,21 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-import 'package:uniquote/stores/most_liked_store.dart';
-import 'package:uniquote/widgets/quote/quote_widget.dart';
+import 'package:uniquote/models/tag_model.dart';
 import 'package:uniquote/widgets/bottom_loader.dart';
+import 'package:uniquote/widgets/quote/quote_widget.dart';
 
-class MostLiked extends StatefulWidget {
+class QuoteListing extends StatefulWidget {
+  final dynamic store;
+  final Tag tag;
+
+  QuoteListing({Key key, this.store, this.tag}) : super(key: key);
+
   @override
-  _MostLikedState createState() => _MostLikedState();
+  _QuoteListingState createState() => _QuoteListingState();
 }
 
-class _MostLikedState extends State<MostLiked>
-    with AutomaticKeepAliveClientMixin {
+class _QuoteListingState extends State<QuoteListing> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
-  final MostLikedStore _mostLikedStore = MostLikedStore();
   final _scrollController = ScrollController();
 
   @override
@@ -25,37 +28,50 @@ class _MostLikedState extends State<MostLiked>
     _scrollController.addListener(() async {
       final maxScroll = _scrollController.position.maxScrollExtent;
       if (maxScroll == _scrollController.position.pixels) {
-        await _mostLikedStore.fetch();
+        fetch(widget.tag);
       }
     });
 
-    _mostLikedStore.refresh();
+    fetch(widget.tag);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      if (_mostLikedStore.quotes.isEmpty) {
+      if (widget.store.quotes.isEmpty) {
         return Center(child: CircularProgressIndicator());
       } else {
         return LiquidPullToRefresh(
           showChildOpacityTransition: false,
           scrollController: _scrollController,
           onRefresh: () async {
-            await _mostLikedStore.refresh();
+            await refresh(widget.tag);
           },
           child: ListView.builder(
             controller: _scrollController,
-            itemCount: _mostLikedStore.quotes.length,
+            itemCount: widget.store.quotes.length,
             itemBuilder: (context, index) {
-              return index + 1 >= _mostLikedStore.quotes.length
+              return index + 1 >= widget.store.quotes.length
                   ? BottomLoader()
-                  : QuoteWidget(_mostLikedStore.quotes[index]);
+                  : QuoteWidget(widget.store.quotes[index]);
             },
           ),
         );
       }
     });
+  }
+
+  Future<void> refresh(Tag tag) async {
+    widget.tag != null
+        ? await widget.store.fetch(widget.tag.id)
+        : await widget.store.fetch();
+  }
+
+  Future<void> fetch(Tag tag) async {
+    widget.tag != null
+        ? await widget.store.fetch(widget.tag.id)
+        : await widget.store.fetch();
   }
 }

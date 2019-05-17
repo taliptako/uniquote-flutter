@@ -51,4 +51,14 @@ mixin _$RootStore on _RootStore, Store {
       _$_RootStoreActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  void logout() {
+    final _$actionInfo = _$_RootStoreActionController.startAction();
+    try {
+      return super.logout();
+    } finally {
+      _$_RootStoreActionController.endAction(_$actionInfo);
+    }
+  }
 }

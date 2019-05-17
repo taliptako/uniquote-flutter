@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:uniquote/config/sl.dart';
 import 'package:uniquote/stores/tag/tag_store.dart';
 import 'package:uniquote/widgets/tag_widget.dart';
 
@@ -12,7 +11,7 @@ class TagScreen extends StatefulWidget {
 }
 
 class _TagScreenState extends State<TagScreen> {
-  TagStore _tagStore = sl<TagStore>();
+  final TagStore _tagStore = TagStore();
 
   @override
   void initState() {

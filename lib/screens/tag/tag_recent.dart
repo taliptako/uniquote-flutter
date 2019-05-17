@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-import 'package:uniquote/config/sl.dart';
 import 'package:uniquote/stores/tag/tag_recent_store.dart';
 import 'package:uniquote/models/tag_model.dart';
 import 'package:uniquote/widgets/quote/quote_widget.dart';
-import 'package:uniquote/widgets/quote/bottom_loader.dart';
+import 'package:uniquote/widgets/bottom_loader.dart';
 
 class TagRecent extends StatefulWidget {
   final Tag tag;
@@ -18,8 +17,11 @@ class TagRecent extends StatefulWidget {
   _TagRecentState createState() => _TagRecentState();
 }
 
-class _TagRecentState extends State<TagRecent> {
-  TagRecentStore _tagRecentStore = sl<TagRecentStore>();
+class _TagRecentState extends State<TagRecent> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  final TagRecentStore _tagRecentStore = TagRecentStore();
   final _scrollController = ScrollController();
 
   @override

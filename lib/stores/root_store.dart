@@ -17,4 +17,9 @@ abstract class _RootStore implements Store {
   void changeBottomNav(int index) {
     bottomNav = index;
   }
+
+  @action
+  void logout() {
+    user = new UserStore();
+  }
 }

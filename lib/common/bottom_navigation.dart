@@ -13,12 +13,7 @@ class BottomNavigation extends StatelessWidget {
     return BottomNavyBar(
       selectedIndex: rootStore.bottomNav,
       onItemSelected: (index) {
-        if (index == 3) {
-          rootStore.changeBottomNav(3);
-        } else {
-          rootStore.changeBottomNav(index);
-          Navigator.pushReplacementNamed(context, '/$index');
-        }
+        rootStore.changeBottomNav(index);
       },
       items: [
         BottomNavyBarItem(

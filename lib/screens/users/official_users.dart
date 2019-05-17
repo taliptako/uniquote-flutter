@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import 'package:uniquote/stores/users/official_users_store.dart';
-import 'package:uniquote/widgets/quote/bottom_loader.dart';
+import 'package:uniquote/widgets/bottom_loader.dart';
 import 'package:uniquote/widgets/user/user_widget.dart';
 
 class OfficialUsers extends StatefulWidget {
@@ -12,7 +12,11 @@ class OfficialUsers extends StatefulWidget {
   _OfficialUsersState createState() => _OfficialUsersState();
 }
 
-class _OfficialUsersState extends State<OfficialUsers> {
+class _OfficialUsersState extends State<OfficialUsers>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   OfficialUsersStore _officialUsersStore = OfficialUsersStore();
   final _scrollController = ScrollController();
 

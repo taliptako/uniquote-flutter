@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:uniquote/config/http.dart';
 import 'package:uniquote/controllers/firebase_controller.dart';
@@ -17,7 +18,7 @@ class AuthController {
   Future register(name, email, password, passwordConfirmation) async {
     final result =
         await _authApi.register(name, email, password, passwordConfirmation);
-    print(result);
+
     if (result is UserStore) {
       await _firebaseController.emailRegister(email, password);
       return loginProcess(result);
@@ -27,7 +28,7 @@ class AuthController {
   Future<bool> googleLogin() async {
     FirebaseUser user = await _firebaseController.googleLogin();
 
-    print(user.uid);
+    print(await user.getIdToken());
     final result = await _authApi.socialLogin(await user.getIdToken());
 
     return loginProcess(result);
@@ -53,7 +54,7 @@ class AuthController {
 
   void successPush(BuildContext context) {
     Navigator.of(context)
-        .pushNamedAndRemoveUntil('/0', (Route<dynamic> route) => false);
+        .pushNamedAndRemoveUntil('/tabs', (Route<dynamic> route) => false);
   }
 
   void logoutPush(BuildContext context) {
@@ -70,8 +71,7 @@ class AuthController {
     var user = await _firebaseController.check();
 
     if (user is FirebaseUser) {
-      final result =
-          await _authApi.socialLogin(await user.getIdToken());
+      final result = await _authApi.socialLogin(await user.getIdToken());
       return await loginProcess(result);
     } else {
       return false;
@@ -81,7 +81,7 @@ class AuthController {
   Future<bool> logout() async {
     await _firebaseController.logout();
     dio.options.headers.remove('Authorization');
-    _rootStore.user = null;
+    _rootStore.logout();
     return true;
   }
 }

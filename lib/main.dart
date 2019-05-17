@@ -3,14 +3,14 @@ import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
 
-import 'package:uniquote/config/dependencies.dart';
 import 'package:uniquote/config/http.dart';
 import 'package:uniquote/config/sl.dart';
+import 'package:uniquote/stores/root_store.dart';
 import 'package:uniquote/config/config.dart';
 import 'package:uniquote/app.dart';
 
 void main() {
-  if (kReleaseMode) {
+  if (kReleaseMode && 1 == 2) {
     final config = Config();
     config.prod();
     sl.registerSingleton<Config>(config);
@@ -20,7 +20,7 @@ void main() {
     sl.registerSingleton<Config>(config);
   }
 
-  Dependencies.register();
+  sl.registerSingleton<RootStore>(RootStore());
 
   // http
   dio.options.baseUrl = sl<Config>().apiUrl;
