@@ -19,12 +19,7 @@ class Home extends StatelessWidget {
         appBar: AppBar(
           title: Text('Home'),
           bottom: TabBar(
-            tabs: <Widget>[
-              Tab(
-                text: "Feed",
-              ),
-              Tab(text: "Most Liked")
-            ],
+            tabs: <Widget>[Tab(text: "Feed"), Tab(text: "Most Liked")],
           ),
         ),
         body: TabBarView(

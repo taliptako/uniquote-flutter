@@ -28,7 +28,6 @@ class AuthController {
   Future<bool> googleLogin() async {
     FirebaseUser user = await _firebaseController.googleLogin();
 
-    print(await user.getIdToken());
     final result = await _authApi.socialLogin(await user.getIdToken());
 
     return loginProcess(result);

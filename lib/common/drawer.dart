@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:nima/nima_actor.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:uniquote/config/sl.dart';
@@ -17,15 +16,9 @@ class DrawerWidget extends StatelessWidget {
     return Drawer(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           drawerHeader(),
           Menu(),
-          Padding(padding: EdgeInsets.only(top: 10)),
-          Padding(padding: EdgeInsets.only(top: 10)),
-          Padding(padding: EdgeInsets.only(top: 10)),
-          Padding(padding: EdgeInsets.only(top: 10)),
-          DrawerAnimation()
         ],
       ),
     );
@@ -146,15 +139,5 @@ class Menu extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-class DrawerAnimation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        height: 140,
-        child: new NimaActor("assets/nima/Recorded_history.nma",
-            fit: BoxFit.scaleDown, animation: "Untitled"));
   }
 }

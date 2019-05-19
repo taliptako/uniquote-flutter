@@ -15,7 +15,7 @@ class QuoteWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: Colors.blue, width: 4))),
+          border: Border(top: BorderSide(color: Colors.deepPurple, width: 4))),
       child: Card(
         margin: EdgeInsets.all(0),
         child: Column(
@@ -45,14 +45,13 @@ class QuoteWidget extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(bottom: 5),
               padding: EdgeInsets.all(7),
               child: Text(
                 quote.quote,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: "Roboto",
-                  fontSize: 17,
+                  fontSize: 15,
                 ),
               ),
             ),

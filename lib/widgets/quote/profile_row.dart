@@ -14,7 +14,7 @@ class ProfileRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(left: 10, top: 10, bottom: 3),
       child: Row(
         children: <Widget>[
           _avatar(),
@@ -26,7 +26,7 @@ class ProfileRow extends StatelessWidget {
                   children: <Widget>[
                     Text('${quote.user.name}',
                         style: TextStyle(
-                          fontSize: 21,
+                          fontSize: 18,
                           fontWeight: FontWeight.w500,
                         )),
                     _professions()
@@ -51,14 +51,14 @@ class ProfileRow extends StatelessWidget {
           spans.children.add(
             TextSpan(
               text: "${profession.name}",
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.black, fontSize: 12),
             ),
           );
         } else {
           spans.children.add(
             TextSpan(
               text: " ${profession.name}",
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.black, fontSize: 12),
             ),
           );
         }
@@ -73,13 +73,13 @@ class ProfileRow extends StatelessWidget {
   CircleAvatar _avatar() {
     if (quote.user.avatarSm == null) {
       return CircleAvatar(
-        radius: 25,
+        radius: 22,
         child: Text('${quote.user.name[0]}',
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600)),
       );
     } else {
       return CircleAvatar(
-        radius: 25,
+        radius: 22,
         backgroundImage: AdvancedNetworkImage(
           sl<Config>().storageUrl + quote.user.avatarSm,
           retryLimit: 1,

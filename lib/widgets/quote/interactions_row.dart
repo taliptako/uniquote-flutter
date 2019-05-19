@@ -52,6 +52,7 @@ class _InteractionRowState extends State<InteractionRow> {
             particle: DemoParticle(),
             pimpedWidgetBuilder: (context, controller) {
               return IconButton(
+                iconSize: 20,
                 icon: quote.hasDisliked
                     ? Icon(GroovinMaterialIcons.thumb_down,
                     color: Colors.deepPurple)
@@ -80,8 +81,8 @@ class _InteractionRowState extends State<InteractionRow> {
             },
             child: Container(
               child: Container(
-                  width: 50,
-                  height: 23,
+                  width: 38,
+                  height: 20,
                   child: FlareActor("assets/flare/Favorite.flr",
                       fit: BoxFit.fitHeight,
                       shouldClip: false,
@@ -98,6 +99,7 @@ class _InteractionRowState extends State<InteractionRow> {
             particle: DemoParticle(),
             pimpedWidgetBuilder: (context, controller) {
               return IconButton(
+                iconSize: 20,
                 icon: quote.hasLiked
                     ? Icon(GroovinMaterialIcons.thumb_up,
                     color: Colors.deepPurple)
