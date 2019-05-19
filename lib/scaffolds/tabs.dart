@@ -12,18 +12,17 @@ class Tabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Observer(
+      body: Observer(
         builder: (_) => IndexedStack(
-              index: _rootStore.bottomNav,
-              children: <Widget>[
-                NavigatorPage(route: '/0'),
-                NavigatorPage(route: '/1'),
-                NavigatorPage(route: '/2'),
-                NavigatorPage(route: '/3'),
-              ],
-            ),
-      )),
+          index: _rootStore.bottomNav,
+          children: <Widget>[
+            NavigatorPage(route: '/0'),
+            NavigatorPage(route: '/1'),
+            NavigatorPage(route: '/2'),
+            NavigatorPage(route: '/3'),
+          ],
+        ),
+      ),
     );
   }
 }

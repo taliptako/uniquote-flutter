@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:uniquote/common/common.dart';
-import 'package:uniquote/screens/tag/tag_screen.dart';
+import 'package:uniquote/screens/about_screen.dart';
 
-class Tag extends StatelessWidget {
+class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerWidget(),
       appBar: AppBar(
-        title: Text("Tags"),
+        title: Text("About"),
       ),
       bottomNavigationBar: BottomNavigation(),
-      body: TagScreen(),
+      body: AboutScreen(),
     );
   }
 }

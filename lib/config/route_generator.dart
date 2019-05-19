@@ -8,8 +8,9 @@ import 'package:uniquote/scaffolds/login.dart';
 import 'package:uniquote/scaffolds/tag_list.dart';
 import 'package:uniquote/scaffolds/favorites.dart';
 import 'package:uniquote/scaffolds/users.dart';
-
 import 'package:uniquote/scaffolds/tabs.dart';
+import 'package:uniquote/scaffolds/about.dart';
+import 'package:uniquote/components/webview_holder.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -39,6 +40,17 @@ class RouteGenerator {
 
       case '/favorites':
         return MaterialPageRoute(builder: (_) => Favorites());
+
+      case '/about':
+        return MaterialPageRoute(builder: (_) => About());
+
+      case '/webview':
+        final WebViewHolder args = settings.arguments;
+        return MaterialPageRoute(
+            builder: (_) => WebViewHolder(
+                  url: args.url,
+                  title: args.title,
+                ));
 
       case '/tag_list':
         return MaterialPageRoute(

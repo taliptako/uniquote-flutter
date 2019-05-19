@@ -128,6 +128,13 @@ class Menu extends StatelessWidget {
           },
         ),
         ListTile(
+          leading: Icon(Icons.library_books),
+          title: Text('About'),
+          onTap: () {
+            Navigator.pushNamed(context, '/about');
+          },
+        ),
+        ListTile(
           leading: Icon(Icons.exit_to_app),
           title: Text('Log Out'),
           onTap: () async {
