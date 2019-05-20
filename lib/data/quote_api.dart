@@ -6,11 +6,11 @@ class QuoteApi {
   DB _db = DB();
   static const String table = "quotes";
 
-  Future fetchFeed(int page) async {
+  Future<List<QuoteStore>> fetchFeed(int page) async {
     var body = await _db.get(table, 'feed$page');
 
     if (body == false) {
-      final r = await dio.get('home?page=$page');
+      final r = await dio.get('dhome?page=$page');
       body = r.data;
       await _db.set(table, 'feed$page', body);
     }
@@ -22,7 +22,7 @@ class QuoteApi {
         .toList();
   }
 
-  Future fetchMostLiked(int page) async {
+  Future<List<QuoteStore>> fetchMostLiked(int page) async {
     var body = await _db.get(table, 'most_liked$page');
 
     if (body == false) {
@@ -38,7 +38,7 @@ class QuoteApi {
         .toList();
   }
 
-  Future fetchTagRecent(int id, int page) async {
+  Future<List<QuoteStore>> fetchTagRecent(int id, int page) async {
     var body = await _db.get(table, '${id}_recent$page');
 
     if (body == false) {
@@ -54,7 +54,7 @@ class QuoteApi {
         .toList();
   }
 
-  Future fetchTagMostLiked(int id, int page) async {
+  Future<List<QuoteStore>> fetchTagMostLiked(int id, int page) async {
     var body = await _db.get(table, '${id}_most_liked$page');
 
     if (body == false) {
@@ -71,13 +71,29 @@ class QuoteApi {
   }
 
 
-  Future fetchUserFavorites() async {
+  Future<List<QuoteStore>> fetchUserFavorites() async {
     var body = await _db.get(table, 'favorites');
 
     if (body == false) {
       final r = await dio.get('user_favorites');
       body = r.data;
       await _db.set(table, 'favorites', body);
+    }
+
+    final json = _db.decode(body);
+
+    return json['data']
+        .map<QuoteStore>((json) => AbstractQuoteStore.fromJson(json))
+        .toList();
+  }
+
+  Future<List<QuoteStore>> fetchUserQuotes(int id, int page) async {
+    var body = await _db.get(table, 'user_${id}_quotes$page');
+
+    if (body == false) {
+      final r = await dio.get('user/$id/quotes?page=$page');
+      body = r.data;
+      await _db.set(table, 'user_${id}_quotes$page', body);
     }
 
     final json = _db.decode(body);

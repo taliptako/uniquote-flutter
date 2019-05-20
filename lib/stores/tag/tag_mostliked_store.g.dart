@@ -39,21 +39,6 @@ mixin _$TagMostLikedStore on _TagMostLikedStore, Store {
     _$pageAtom.reportChanged();
   }
 
-  final _$errorAtom = Atom(name: '_TagMostLikedStore.error');
-
-  @override
-  String get error {
-    _$errorAtom.reportObserved();
-    return super.error;
-  }
-
-  @override
-  set error(String value) {
-    _$errorAtom.context.checkIfStateModificationsAreAllowed(_$errorAtom);
-    super.error = value;
-    _$errorAtom.reportChanged();
-  }
-
   final _$refreshAsyncAction = AsyncAction('refresh');
 
   @override

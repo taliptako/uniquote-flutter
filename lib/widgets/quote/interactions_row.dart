@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:edge_alert/edge_alert.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 import 'package:pimp_my_button/pimp_my_button.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -23,16 +21,6 @@ class _InteractionRowState extends State<InteractionRow> {
 
   @override
   void initState() {
-    reaction((_) => widget.quote.error, (msg) {
-      EdgeAlert.show(context,
-          icon: Icons.error,
-          duration: 3,
-          title: 'Error',
-          backgroundColor: Colors.red,
-          description: msg,
-          gravity: EdgeAlert.BOTTOM);
-    });
-
     super.initState();
   }
 
@@ -55,7 +43,7 @@ class _InteractionRowState extends State<InteractionRow> {
                 iconSize: 20,
                 icon: quote.hasDisliked
                     ? Icon(GroovinMaterialIcons.thumb_down,
-                    color: Colors.deepPurple)
+                        color: Colors.deepPurple)
                     : Icon(GroovinMaterialIcons.thumb_down_outline),
                 onPressed: () {
                   if (quote.hasDisliked) {
@@ -92,7 +80,7 @@ class _InteractionRowState extends State<InteractionRow> {
                       animation: quote.hasFavorited
                           ? "Favorite"
                           : "Unfavorite" //_animationName
-                  )),
+                      )),
             ),
           ),
           PimpedButton(
@@ -102,7 +90,7 @@ class _InteractionRowState extends State<InteractionRow> {
                 iconSize: 20,
                 icon: quote.hasLiked
                     ? Icon(GroovinMaterialIcons.thumb_up,
-                    color: Colors.deepPurple)
+                        color: Colors.deepPurple)
                     : Icon(GroovinMaterialIcons.thumb_up_outline),
                 onPressed: () {
                   if (quote.hasLiked) {

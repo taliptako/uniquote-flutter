@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
+import 'package:uniquote/components/error_notifier.dart';
 import 'package:uniquote/stores/favorites_store.dart';
 import 'package:uniquote/widgets/quote/quote_widget.dart';
 
@@ -17,6 +18,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   void initState() {
+    ErrorNotifier(context).invoke();
+
     _favoritesStore.load();
     super.initState();
   }
@@ -24,8 +27,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      if (_favoritesStore.quotes.isEmpty) {
+      if (_favoritesStore.isCompleted == false) {
         return Center(child: CircularProgressIndicator());
+      }
+
+      if (_favoritesStore.isCompleted && _favoritesStore.quotes.isEmpty) {
+        return Center(child: Text('No Favorites'));
       } else {
         return LiquidPullToRefresh(
           showChildOpacityTransition: false,

@@ -1,5 +1,7 @@
 import 'package:mobx/mobx.dart';
 
+import 'package:dio/dio.dart';
+
 import 'package:uniquote/models/user_store.dart';
 
 part 'root_store.g.dart';
@@ -12,6 +14,9 @@ abstract class _RootStore implements Store {
 
   @observable
   int bottomNav = 0;
+
+  @observable
+  DioError error;
 
   @action
   void changeBottomNav(int index) {

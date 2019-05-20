@@ -16,15 +16,10 @@ abstract class _NormalUsersStore implements Store {
   @observable
   int page = 1;
 
-  @observable
-  String error;
-
   @action
   refresh() async {
     final result = await _userApi.fetchNormalUsers(1);
-    if (result == false) {
-      error = "Error occurred while getting quotes";
-    } else {
+    if (result is List<UserStore>) {
       users.clear();
       users.addAll(result);
     }
@@ -34,10 +29,6 @@ abstract class _NormalUsersStore implements Store {
   fetch() async {
     page++;
     final result = await _userApi.fetchNormalUsers(page);
-    if (result == false) {
-      error = "Error occurred while getting quotes";
-    } else {
-      users.addAll(result);
-    }
+    users.addAll(result);
   }
 }

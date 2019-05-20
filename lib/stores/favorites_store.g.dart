@@ -24,19 +24,20 @@ mixin _$FavoritesStore on _FavoritesStore, Store {
     _$quotesAtom.reportChanged();
   }
 
-  final _$errorAtom = Atom(name: '_FavoritesStore.error');
+  final _$isCompletedAtom = Atom(name: '_FavoritesStore.isCompleted');
 
   @override
-  String get error {
-    _$errorAtom.reportObserved();
-    return super.error;
+  bool get isCompleted {
+    _$isCompletedAtom.reportObserved();
+    return super.isCompleted;
   }
 
   @override
-  set error(String value) {
-    _$errorAtom.context.checkIfStateModificationsAreAllowed(_$errorAtom);
-    super.error = value;
-    _$errorAtom.reportChanged();
+  set isCompleted(bool value) {
+    _$isCompletedAtom.context
+        .checkIfStateModificationsAreAllowed(_$isCompletedAtom);
+    super.isCompleted = value;
+    _$isCompletedAtom.reportChanged();
   }
 
   final _$loadAsyncAction = AsyncAction('load');

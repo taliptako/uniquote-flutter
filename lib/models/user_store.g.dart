@@ -102,4 +102,11 @@ mixin _$UserStore on AbstractUserStore, Store {
   Future unFollow() {
     return _$unFollowAsyncAction.run(() => super.unFollow());
   }
+
+  final _$getAdditionalAsyncAction = AsyncAction('getAdditional');
+
+  @override
+  Future getAdditional() {
+    return _$getAdditionalAsyncAction.run(() => super.getAdditional());
+  }
 }

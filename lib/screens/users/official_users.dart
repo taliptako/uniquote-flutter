@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
+import 'package:uniquote/components/error_notifier.dart';
 import 'package:uniquote/stores/users/official_users_store.dart';
 import 'package:uniquote/widgets/bottom_loader.dart';
 import 'package:uniquote/widgets/user/user_widget.dart';
@@ -28,6 +29,8 @@ class _OfficialUsersState extends State<OfficialUsers>
         await _officialUsersStore.fetch();
       }
     });
+
+    ErrorNotifier(context).invoke();
 
     _officialUsersStore.refresh();
     super.initState();

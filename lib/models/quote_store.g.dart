@@ -9,21 +9,6 @@ part of 'quote_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
 mixin _$QuoteStore on AbstractQuoteStore, Store {
-  final _$errorAtom = Atom(name: 'AbstractQuoteStore.error');
-
-  @override
-  String get error {
-    _$errorAtom.reportObserved();
-    return super.error;
-  }
-
-  @override
-  set error(String value) {
-    _$errorAtom.context.checkIfStateModificationsAreAllowed(_$errorAtom);
-    super.error = value;
-    _$errorAtom.reportChanged();
-  }
-
   final _$likeCountAtom = Atom(name: 'AbstractQuoteStore.likeCount');
 
   @override

@@ -14,14 +14,13 @@ abstract class _FavoritesStore implements Store {
   ObservableList<QuoteStore> quotes = ObservableList<QuoteStore>();
 
   @observable
-  String error;
+  bool isCompleted = false;
 
   @action
   load() async {
     final result = await _quoteApi.fetchUserFavorites();
-    if (result == false) {
-      error = "Error occurred while getting quotes";
-    } else {
+    if (result is List<QuoteStore>) {
+      isCompleted = true;
       quotes.clear();
       quotes.addAll(result);
     }

@@ -6,7 +6,7 @@ class UserApi {
   DB _db = DB();
   static const String table = "users";
 
-  Future fetchOfficialUsers(int page) async {
+  Future<List<UserStore>> fetchOfficialUsers(int page) async {
     var body = await _db.get(table, 'official$page');
 
     if (body == false) {
@@ -22,7 +22,7 @@ class UserApi {
         .toList();
   }
 
-  Future fetchNormalUsers(int page) async {
+  Future<List<UserStore>> fetchNormalUsers(int page) async {
     var body = await _db.get(table, 'normal$page');
 
     if (body == false) {
@@ -38,17 +38,25 @@ class UserApi {
         .toList();
   }
 
-  Future followUser(int userId) async {
+  Future<UserStore> fetchUser(int id) async {
+    final r = await dio.get('user/$id');
+
+    final json = _db.decode(r.data);
+
+    return AbstractUserStore.fromJson(json['data']);
+  }
+
+  Future<bool> followUser(int userId) async {
     final r = await dio.put('user/$userId/follow');
-    if(r.statusCode == 200) {
+    if (r.statusCode == 200) {
       return true;
     }
     return false;
   }
 
-  Future unFollowUser(int userId) async {
+  Future<bool> unFollowUser(int userId) async {
     final r = await dio.put('user/$userId/unfollow');
-    if(r.statusCode == 200) {
+    if (r.statusCode == 200) {
       return true;
     }
     return false;

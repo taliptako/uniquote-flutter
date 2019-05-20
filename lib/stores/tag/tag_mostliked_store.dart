@@ -16,15 +16,10 @@ abstract class _TagMostLikedStore implements Store {
   @observable
   int page = 1;
 
-  @observable
-  String error;
-
   @action
   refresh(int id) async {
     final result = await _quoteApi.fetchTagMostLiked(id, 1);
-    if (result == false) {
-      error = "Error occurred while getting quotes";
-    } else {
+    if (result is List<QuoteStore>) {
       quotes.clear();
       quotes.addAll(result);
     }
@@ -34,10 +29,6 @@ abstract class _TagMostLikedStore implements Store {
   fetch(int id) async {
     page++;
     final result = await _quoteApi.fetchTagMostLiked(id, page);
-    if (result == false) {
-      error = "Error occurred while getting quotes";
-    } else {
-      quotes.addAll(result);
-    }
+    quotes.addAll(result);
   }
 }

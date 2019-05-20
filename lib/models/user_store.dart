@@ -83,6 +83,14 @@ abstract class AbstractUserStore implements Store {
     }
   }
 
+  @action
+  getAdditional() async {
+    UserStore newUser = await _userApi.fetchUser(id);
+    followerCount = newUser.followerCount;
+    followingCount = newUser.followingCount;
+    quoteCount = newUser.quoteCount;
+  }
+
   static UserStore fromJson(Map<String, dynamic> json) {
     return UserStore(
         id: json['id'],

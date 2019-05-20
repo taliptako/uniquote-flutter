@@ -10,6 +10,7 @@ import 'package:uniquote/scaffolds/favorites.dart';
 import 'package:uniquote/scaffolds/users.dart';
 import 'package:uniquote/scaffolds/tabs.dart';
 import 'package:uniquote/scaffolds/about.dart';
+import 'package:uniquote/scaffolds/profile.dart';
 import 'package:uniquote/components/webview_holder.dart';
 
 class RouteGenerator {
@@ -43,6 +44,12 @@ class RouteGenerator {
 
       case '/about':
         return MaterialPageRoute(builder: (_) => About());
+
+      case '/profile':
+        return MaterialPageRoute(
+            builder: (_) => Profile(
+                  user: args,
+                ));
 
       case '/webview':
         final WebViewHolder args = settings.arguments;

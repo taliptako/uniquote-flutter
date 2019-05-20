@@ -27,8 +27,9 @@ void main() {
   dio.options.connectTimeout = 6000; //5s
   dio.options.receiveTimeout = 9000;
   dio.options.responseType = ResponseType.plain;
-  dio.interceptors.add(InterceptorsWrapper(onError: (DioError e) {
-    // Do something with response error
+  dio.interceptors.add(InterceptorsWrapper(
+      onError: (DioError e) {
+        sl<RootStore>().error = e;
   }));
   // http
 

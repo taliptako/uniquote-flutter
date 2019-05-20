@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tag_recent_store.dart';
+part of 'profile_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'tag_recent_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars
 
-mixin _$TagRecentStore on _TagRecentStore, Store {
-  final _$quotesAtom = Atom(name: '_TagRecentStore.quotes');
+mixin _$ProfileStore on _ProfileStore, Store {
+  final _$quotesAtom = Atom(name: '_ProfileStore.quotes');
 
   @override
   ObservableList<QuoteStore> get quotes {
@@ -24,7 +24,7 @@ mixin _$TagRecentStore on _TagRecentStore, Store {
     _$quotesAtom.reportChanged();
   }
 
-  final _$pageAtom = Atom(name: '_TagRecentStore.page');
+  final _$pageAtom = Atom(name: '_ProfileStore.page');
 
   @override
   int get page {
@@ -39,11 +39,20 @@ mixin _$TagRecentStore on _TagRecentStore, Store {
     _$pageAtom.reportChanged();
   }
 
-  final _$refreshAsyncAction = AsyncAction('refresh');
+  final _$isCompletedAtom = Atom(name: '_ProfileStore.isCompleted');
 
   @override
-  Future refresh(int id) {
-    return _$refreshAsyncAction.run(() => super.refresh(id));
+  bool get isCompleted {
+    _$isCompletedAtom.reportObserved();
+    return super.isCompleted;
+  }
+
+  @override
+  set isCompleted(bool value) {
+    _$isCompletedAtom.context
+        .checkIfStateModificationsAreAllowed(_$isCompletedAtom);
+    super.isCompleted = value;
+    _$isCompletedAtom.reportChanged();
   }
 
   final _$fetchAsyncAction = AsyncAction('fetch');

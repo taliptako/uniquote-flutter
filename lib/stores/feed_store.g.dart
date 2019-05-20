@@ -39,21 +39,6 @@ mixin _$FeedStore on _FeedStore, Store {
     _$pageAtom.reportChanged();
   }
 
-  final _$errorAtom = Atom(name: '_FeedStore.error');
-
-  @override
-  String get error {
-    _$errorAtom.reportObserved();
-    return super.error;
-  }
-
-  @override
-  set error(String value) {
-    _$errorAtom.context.checkIfStateModificationsAreAllowed(_$errorAtom);
-    super.error = value;
-    _$errorAtom.reportChanged();
-  }
-
   final _$refreshAsyncAction = AsyncAction('refresh');
 
   @override

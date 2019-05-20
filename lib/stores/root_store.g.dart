@@ -40,6 +40,21 @@ mixin _$RootStore on _RootStore, Store {
     _$bottomNavAtom.reportChanged();
   }
 
+  final _$errorAtom = Atom(name: '_RootStore.error');
+
+  @override
+  DioError get error {
+    _$errorAtom.reportObserved();
+    return super.error;
+  }
+
+  @override
+  set error(DioError value) {
+    _$errorAtom.context.checkIfStateModificationsAreAllowed(_$errorAtom);
+    super.error = value;
+    _$errorAtom.reportChanged();
+  }
+
   final _$_RootStoreActionController = ActionController(name: '_RootStore');
 
   @override

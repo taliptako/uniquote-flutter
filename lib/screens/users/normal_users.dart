@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
+import 'package:uniquote/components/error_notifier.dart';
 import 'package:uniquote/stores/users/normal_users_store.dart';
 import 'package:uniquote/widgets/bottom_loader.dart';
 import 'package:uniquote/widgets/user/user_widget.dart';
@@ -27,6 +28,8 @@ class _NormalUsersState extends State<NormalUsers> with AutomaticKeepAliveClient
         await _normalUsersStore.fetch();
       }
     });
+
+    ErrorNotifier(context).invoke();
 
     _normalUsersStore.refresh();
     super.initState();

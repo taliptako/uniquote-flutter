@@ -31,9 +31,6 @@ abstract class AbstractQuoteStore implements Store {
   final UserStore user;
 
   @observable
-  String error;
-
-  @observable
   int likeCount;
 
   @observable
@@ -54,7 +51,6 @@ abstract class AbstractQuoteStore implements Store {
     _rootStore.user.favoriteCount++;
     bool result = await _quoteApi.interact('favorite', id);
     if (!result) {
-      error = "Quote ID: $id Error occurred during favorite process";
       hasFavorited = false;
       _rootStore.user.favoriteCount--;
     }
@@ -66,7 +62,6 @@ abstract class AbstractQuoteStore implements Store {
     _rootStore.user.favoriteCount--;
     bool result = await _quoteApi.interact('unfavorite', id);
     if (!result) {
-      error = "Quote ID: $id Error occurred during unFavorite process";
       hasFavorited = true;
       _rootStore.user.favoriteCount++;
     }
@@ -78,7 +73,6 @@ abstract class AbstractQuoteStore implements Store {
     likeCount++;
     bool result = await _quoteApi.interact('like', id);
     if (!result) {
-      error = "Quote ID: $id Error occurred during like process";
       hasLiked = false;
       likeCount--;
     }
@@ -90,7 +84,6 @@ abstract class AbstractQuoteStore implements Store {
     likeCount--;
     bool result = await _quoteApi.interact('unlike', id);
     if (!result) {
-      error = "Quote ID: $id Error occurred during unlike process";
       hasLiked = true;
       likeCount++;
     }
@@ -102,7 +95,6 @@ abstract class AbstractQuoteStore implements Store {
     dislikeCount++;
     bool result = await _quoteApi.interact('dislike', id);
     if (!result) {
-      error = "Quote ID: $id Error occurred during disLike process";
       hasDisliked = false;
       dislikeCount--;
     }
@@ -114,7 +106,6 @@ abstract class AbstractQuoteStore implements Store {
     dislikeCount--;
     bool result = await _quoteApi.interact('undislike', id);
     if (!result) {
-      error = "Quote ID: $id Error occurred during unDislike process";
       hasDisliked = true;
       dislikeCount++;
     }

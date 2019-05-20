@@ -3,11 +3,11 @@ import 'package:mobx/mobx.dart';
 import 'package:uniquote/data/quote_api.dart';
 import 'package:uniquote/models/quote_store.dart';
 
-part 'feed_store.g.dart';
+part 'profile_store.g.dart';
 
-class FeedStore = _FeedStore with _$FeedStore;
+class ProfileStore = _ProfileStore with _$ProfileStore;
 
-abstract class _FeedStore implements Store {
+abstract class _ProfileStore implements Store {
   final QuoteApi _quoteApi = QuoteApi();
 
   @observable
@@ -16,18 +16,16 @@ abstract class _FeedStore implements Store {
   @observable
   int page = 1;
 
-  @action
-  refresh() async {
-    final result = await _quoteApi.fetchFeed(1);
-    if (result is List<QuoteStore>) {
-      quotes.addAll(result);
-    }
-  }
+  @observable
+  bool isCompleted = false;
 
   @action
-  fetch() async {
+  fetch(int id) async {
     page++;
-    final result = await _quoteApi.fetchFeed(page);
-    quotes.addAll(result);
+    final result = await _quoteApi.fetchUserQuotes(id, page);
+    if (result is List<QuoteStore>) {
+      isCompleted = true;
+      quotes.addAll(result);
+    }
   }
 }

@@ -22,9 +22,7 @@ abstract class _MostLikedStore implements Store {
   @action
   refresh() async {
     final result = await _quoteApi.fetchMostLiked(1);
-    if (result == false) {
-      error = "Error occurred while getting quotes";
-    } else {
+    if (result is List<QuoteStore>) {
       quotes.clear();
       quotes.addAll(result);
     }
@@ -34,10 +32,7 @@ abstract class _MostLikedStore implements Store {
   fetch() async {
     page++;
     final result = await _quoteApi.fetchMostLiked(page);
-    if (result == false) {
-      error = "Error occurred while getting quotes";
-    } else {
-      quotes.addAll(result);
-    }
+
+    quotes.addAll(result);
   }
 }
