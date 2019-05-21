@@ -19,8 +19,10 @@ class SocialButtons extends StatelessWidget {
               Progress.show(context);
               final bool result = await _authController.googleLogin();
               if (result == true) {
+                Progress.hide(context);
                 _authController.successPush(context);
               } else {
+                Progress.hide(context);
                 _authController.logoutPush(context);
               }
             },

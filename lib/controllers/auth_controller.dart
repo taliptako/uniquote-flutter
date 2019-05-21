@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:uniquote/config/http.dart';
 import 'package:uniquote/controllers/firebase_controller.dart';
@@ -10,6 +12,7 @@ import 'package:uniquote/models/user_store.dart';
 import 'package:uniquote/data/auth_api.dart';
 
 class AuthController {
+  final _storage = FlutterSecureStorage();
   final RootStore _rootStore = sl<RootStore>();
   final FirebaseController _firebaseController = FirebaseController();
   final AuthApi _authApi = AuthApi();
@@ -42,6 +45,7 @@ class AuthController {
   Future<bool> loginProcess(result) async {
     if (result is UserStore) {
       _rootStore.user = result;
+      await storeUserToStorage(result);
       dio.options.headers = {'Authorization': 'Bearer ${result.apiToken}'};
       return true;
     } else {
@@ -69,8 +73,40 @@ class AuthController {
     var user = await _firebaseController.check();
 
     if (user is FirebaseUser) {
-      final result = await _authApi.socialLogin(await user.getIdToken());
-      return await loginProcess(result);
+      final sUser = await getUserFromStorage();
+      if (sUser is UserStore) {
+        return await loginProcess(sUser);
+      } else {
+        final result = await _authApi.socialLogin(await user.getIdToken());
+        return await loginProcess(result);
+      }
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> storeUserToStorage(UserStore user) async {
+    await _storage.write(key: "user", value: jsonEncode(user));
+  }
+
+  Future getUserFromStorage() async {
+    final data = await _storage.read(key: 'user');
+    if (data == null) {
+      return false;
+    }
+    final UserStore user = AbstractUserStore.fromJson(jsonDecode(data));
+    return user;
+  }
+
+  Future checkLocal(FirebaseUser fUser) async {
+    final sUser = await getUserFromStorage();
+    if (sUser is UserStore) {
+      if (fUser.email == sUser.email) {
+        sUser.apiToken = null;
+        return sUser;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
@@ -78,6 +114,7 @@ class AuthController {
 
   Future<bool> logout() async {
     await _firebaseController.logout();
+    await _storage.delete(key: 'user');
     dio.options.headers.remove('Authorization');
     _rootStore.logout();
     return true;

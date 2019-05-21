@@ -37,6 +37,7 @@ dependencies:
   share: ^0.6.1+1
 
   flutter_advanced_networkimage: ^0.4.15
+  flutter_secure_storage: ^3.2.1+1
 
   random_color: ^1.0.3
 

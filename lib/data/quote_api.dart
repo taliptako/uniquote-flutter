@@ -10,7 +10,7 @@ class QuoteApi {
     var body = await _db.get(table, 'feed$page');
 
     if (body == false) {
-      final r = await dio.get('dhome?page=$page');
+      final r = await dio.get('home?page=$page');
       body = r.data;
       await _db.set(table, 'feed$page', body);
     }

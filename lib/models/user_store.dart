@@ -24,7 +24,7 @@ abstract class AbstractUserStore implements Store {
   final String avatarLg;
   final String avatarSm;
   final String password;
-  final String apiToken;
+  String apiToken;
 
   final List professions;
 
@@ -119,4 +119,24 @@ abstract class AbstractUserStore implements Store {
                 .toList()
             : null);
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'email': email,
+        'nationality': nationality,
+        'religion': religion,
+        'bio': bio,
+        'bio_url': bioUrl,
+        'born': born,
+        'avatar_lg': avatarLg,
+        'avatar_sm': avatarSm,
+        'password': password,
+        'api_token': apiToken,
+        'follower_count': followerCount,
+        'following_count': followingCount,
+        'quote_count': quoteCount,
+        'favorite_count': favoriteCount,
+        'isFollowed': isFollowed,
+      };
 }
