@@ -42,7 +42,7 @@ class Buttons extends StatelessWidget {
                   onPressed: () async {
                     Navigator.pushNamed(context, '/webview',
                         arguments: WebViewHolder(
-                          title: "Privacy Policy",
+                          title: user.name,
                           url: user.bioUrl,
                         ));
                   },

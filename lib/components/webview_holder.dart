@@ -23,6 +23,7 @@ class WebViewHolder extends StatelessWidget {
           children: [
             Expanded(
                 child: WebView(
+              javascriptMode: JavascriptMode.unrestricted,
               initialUrl: url,
               onWebViewCreated: (WebViewController webViewController) {
                 _controller.complete(webViewController);

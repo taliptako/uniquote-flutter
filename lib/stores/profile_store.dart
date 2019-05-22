@@ -17,15 +17,18 @@ abstract class _ProfileStore implements Store {
   int page = 1;
 
   @observable
-  bool isCompleted = false;
+  bool hasReachedEnd = false;
 
   @action
   fetch(int id) async {
-    page++;
     final result = await _quoteApi.fetchUserQuotes(id, page);
     if (result is List<QuoteStore>) {
-      isCompleted = true;
-      quotes.addAll(result);
+      if (result.isEmpty) {
+        hasReachedEnd = true;
+      } else {
+        page++;
+        quotes.addAll(result);
+      }
     }
   }
 }

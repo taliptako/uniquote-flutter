@@ -38,7 +38,13 @@ class _ProfileQuotesState extends State<ProfileQuotes> {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      if (_profileStore.isCompleted == false) {
+      if (_profileStore.page == 1 && _profileStore.hasReachedEnd) {
+        return SliverToBoxAdapter(
+          child: Center(
+            child: Text('No Quotes'),
+          ),
+        );
+      } else if (!_profileStore.hasReachedEnd && _profileStore.quotes.isEmpty){
         return SliverToBoxAdapter(
           child: Center(
             child: CircularProgressIndicator(),
@@ -46,22 +52,14 @@ class _ProfileQuotesState extends State<ProfileQuotes> {
         );
       }
 
-      if (_profileStore.quotes.isEmpty) {
-        return SliverToBoxAdapter(
-          child: Center(
-            child: Text('No Quotes'),
-          ),
-        );
-      } else {
-        return SliverList(
-          delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            return index + 1 >= _profileStore.quotes.length
-                ? BottomLoader()
-                : QuoteWidget(_profileStore.quotes[index]);
-          }, childCount: _profileStore.quotes.length),
-        );
-      }
+      return SliverList(
+        delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+          return index + 1 >= _profileStore.quotes.length &&
+                  !_profileStore.hasReachedEnd
+              ? BottomLoader()
+              : QuoteWidget(_profileStore.quotes[index]);
+        }, childCount: _profileStore.quotes.length),
+      );
     });
   }
 }

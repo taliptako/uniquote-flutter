@@ -39,20 +39,20 @@ mixin _$ProfileStore on _ProfileStore, Store {
     _$pageAtom.reportChanged();
   }
 
-  final _$isCompletedAtom = Atom(name: '_ProfileStore.isCompleted');
+  final _$hasReachedEndAtom = Atom(name: '_ProfileStore.hasReachedEnd');
 
   @override
-  bool get isCompleted {
-    _$isCompletedAtom.reportObserved();
-    return super.isCompleted;
+  bool get hasReachedEnd {
+    _$hasReachedEndAtom.reportObserved();
+    return super.hasReachedEnd;
   }
 
   @override
-  set isCompleted(bool value) {
-    _$isCompletedAtom.context
-        .checkIfStateModificationsAreAllowed(_$isCompletedAtom);
-    super.isCompleted = value;
-    _$isCompletedAtom.reportChanged();
+  set hasReachedEnd(bool value) {
+    _$hasReachedEndAtom.context
+        .checkIfStateModificationsAreAllowed(_$hasReachedEndAtom);
+    super.hasReachedEnd = value;
+    _$hasReachedEndAtom.reportChanged();
   }
 
   final _$fetchAsyncAction = AsyncAction('fetch');
