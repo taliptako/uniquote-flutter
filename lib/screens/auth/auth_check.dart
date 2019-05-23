@@ -10,7 +10,7 @@ class AuthCheck extends StatefulWidget {
 class _AuthCheckState extends State<AuthCheck> {
   final AuthController _authController = AuthController();
 
-  Future check() async {
+  Future<void> check() async {
     if (await _authController.check()) {
       _authController.successPush(context);
     } else {

@@ -14,14 +14,14 @@ class Tabs extends StatelessWidget {
     return Scaffold(
       body: Observer(
         builder: (_) => IndexedStack(
-          index: _rootStore.bottomNav,
-          children: <Widget>[
-            NavigatorPage(route: '/0'),
-            NavigatorPage(route: '/1'),
-            NavigatorPage(route: '/2'),
-            NavigatorPage(route: '/3'),
-          ],
-        ),
+              index: _rootStore.bottomNav,
+              children: <Widget>[
+                NavigatorPage(route: '0'),
+                NavigatorPage(route: '1'),
+                NavigatorPage(route: '2'),
+                NavigatorPage(route: '3'),
+              ],
+            ),
       ),
     );
   }

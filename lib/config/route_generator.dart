@@ -18,7 +18,10 @@ class RouteGenerator {
     final args = settings.arguments;
 
     switch (settings.name) {
-      case '/auth_check':
+      case '/':
+        return MaterialPageRoute(builder: (_) => AuthCheck());
+
+      case 'auth_check':
         return MaterialPageRoute(builder: (_) => AuthCheck());
 
       case '/register':
@@ -30,13 +33,16 @@ class RouteGenerator {
       case '/tabs':
         return MaterialPageRoute(builder: (_) => Tabs());
 
-      case '/0':
+      case '0':
         return MaterialPageRoute(builder: (_) => Home());
 
-      case '/1':
+      case '1':
         return MaterialPageRoute(builder: (_) => Tag());
 
-      case '/2':
+      case '2':
+        return MaterialPageRoute(builder: (_) => Users());
+
+      case '3':
         return MaterialPageRoute(builder: (_) => Users());
 
       case '/favorites':
@@ -66,20 +72,7 @@ class RouteGenerator {
                 ));
 
       default:
-        return _errorRoute();
+        return MaterialPageRoute(builder: (_) => AuthCheck());
     }
-  }
-
-  static Route<dynamic> _errorRoute() {
-    return MaterialPageRoute(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Error'),
-        ),
-        body: Center(
-          child: Text('ERROR'),
-        ),
-      );
-    });
   }
 }
