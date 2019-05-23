@@ -16,6 +16,9 @@ abstract class _TagRecentStore implements Store {
   @observable
   int page = 1;
 
+  @observable
+  bool hasReachedEnd = false;
+
   @action
   refresh(int id) async {
     final result = await _quoteApi.fetchTagRecent(id, 1);
@@ -27,8 +30,12 @@ abstract class _TagRecentStore implements Store {
 
   @action
   fetch(int id) async {
-    page++;
     final result = await _quoteApi.fetchTagRecent(id, page);
-    quotes.addAll(result);
+    if (result.isEmpty) {
+      hasReachedEnd = true;
+    } else {
+      page++;
+      quotes.addAll(result);
+    }
   }
 }

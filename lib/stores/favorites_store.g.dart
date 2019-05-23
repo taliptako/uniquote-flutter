@@ -24,26 +24,48 @@ mixin _$FavoritesStore on _FavoritesStore, Store {
     _$quotesAtom.reportChanged();
   }
 
-  final _$isCompletedAtom = Atom(name: '_FavoritesStore.isCompleted');
+  final _$pageAtom = Atom(name: '_FavoritesStore.page');
 
   @override
-  bool get isCompleted {
-    _$isCompletedAtom.reportObserved();
-    return super.isCompleted;
+  int get page {
+    _$pageAtom.reportObserved();
+    return super.page;
   }
 
   @override
-  set isCompleted(bool value) {
-    _$isCompletedAtom.context
-        .checkIfStateModificationsAreAllowed(_$isCompletedAtom);
-    super.isCompleted = value;
-    _$isCompletedAtom.reportChanged();
+  set page(int value) {
+    _$pageAtom.context.checkIfStateModificationsAreAllowed(_$pageAtom);
+    super.page = value;
+    _$pageAtom.reportChanged();
   }
 
-  final _$loadAsyncAction = AsyncAction('load');
+  final _$hasReachedEndAtom = Atom(name: '_FavoritesStore.hasReachedEnd');
 
   @override
-  Future load() {
-    return _$loadAsyncAction.run(() => super.load());
+  bool get hasReachedEnd {
+    _$hasReachedEndAtom.reportObserved();
+    return super.hasReachedEnd;
+  }
+
+  @override
+  set hasReachedEnd(bool value) {
+    _$hasReachedEndAtom.context
+        .checkIfStateModificationsAreAllowed(_$hasReachedEndAtom);
+    super.hasReachedEnd = value;
+    _$hasReachedEndAtom.reportChanged();
+  }
+
+  final _$refreshAsyncAction = AsyncAction('refresh');
+
+  @override
+  Future refresh() {
+    return _$refreshAsyncAction.run(() => super.refresh());
+  }
+
+  final _$fetchAsyncAction = AsyncAction('fetch');
+
+  @override
+  Future fetch() {
+    return _$fetchAsyncAction.run(() => super.fetch());
   }
 }

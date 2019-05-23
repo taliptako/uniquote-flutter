@@ -16,6 +16,9 @@ abstract class _OfficialUsersStore implements Store {
   @observable
   int page = 1;
 
+  @observable
+  bool hasReachedEnd = false;
+
   @action
   refresh() async {
     final result = await _userApi.fetchOfficialUsers(1);
@@ -27,9 +30,13 @@ abstract class _OfficialUsersStore implements Store {
 
   @action
   fetch() async {
-    page++;
     final result = await _userApi.fetchOfficialUsers(page);
+    if (result.isEmpty) {
+      hasReachedEnd = true;
+    } else {
+      page++;
+      users.addAll(result);
+    }
 
-    users.addAll(result);
   }
 }

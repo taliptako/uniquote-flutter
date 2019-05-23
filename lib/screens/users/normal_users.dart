@@ -13,7 +13,8 @@ class NormalUsers extends StatefulWidget {
   _NormalUsersState createState() => _NormalUsersState();
 }
 
-class _NormalUsersState extends State<NormalUsers> with AutomaticKeepAliveClientMixin {
+class _NormalUsersState extends State<NormalUsers>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -39,26 +40,40 @@ class _NormalUsersState extends State<NormalUsers> with AutomaticKeepAliveClient
   Widget build(BuildContext context) {
     super.build(context);
     return Observer(builder: (_) {
-      if (_normalUsersStore.users.isEmpty) {
-        return Center(child: CircularProgressIndicator());
-      } else {
-        return LiquidPullToRefresh(
-          showChildOpacityTransition: false,
-          scrollController: _scrollController,
-          onRefresh: () async {
-            await _normalUsersStore.refresh();
-          },
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: _normalUsersStore.users.length,
-            itemBuilder: (context, index) {
-              return index + 1 >= _normalUsersStore.users.length
-                  ? BottomLoader()
-                  : UserWidget(user: _normalUsersStore.users[index]);
-            },
-          ),
+      if (_normalUsersStore.page == 1 && _normalUsersStore.hasReachedEnd) {
+        return Center(
+          child: Text('No User'),
+        );
+      } else if (!_normalUsersStore.hasReachedEnd &&
+          _normalUsersStore.users.isEmpty) {
+        return Center(
+          child: CircularProgressIndicator(),
         );
       }
+
+      return LiquidPullToRefresh(
+        showChildOpacityTransition: false,
+        scrollController: _scrollController,
+        onRefresh: () async {
+          await _normalUsersStore.refresh();
+        },
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: _normalUsersStore.users.length,
+          itemBuilder: (context, index) {
+            return index + 1 >= _normalUsersStore.users.length &&
+                    !_normalUsersStore.hasReachedEnd &&
+                    _normalUsersStore.users.length > 5
+                ? Column(
+                    children: <Widget>[
+                      UserWidget(user: _normalUsersStore.users[index]),
+                      BottomLoader()
+                    ],
+                  )
+                : UserWidget(user: _normalUsersStore.users[index]);
+          },
+        ),
+      );
     });
   }
 }

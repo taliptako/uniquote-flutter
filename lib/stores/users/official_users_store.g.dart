@@ -39,6 +39,22 @@ mixin _$OfficialUsersStore on _OfficialUsersStore, Store {
     _$pageAtom.reportChanged();
   }
 
+  final _$hasReachedEndAtom = Atom(name: '_OfficialUsersStore.hasReachedEnd');
+
+  @override
+  bool get hasReachedEnd {
+    _$hasReachedEndAtom.reportObserved();
+    return super.hasReachedEnd;
+  }
+
+  @override
+  set hasReachedEnd(bool value) {
+    _$hasReachedEndAtom.context
+        .checkIfStateModificationsAreAllowed(_$hasReachedEndAtom);
+    super.hasReachedEnd = value;
+    _$hasReachedEndAtom.reportChanged();
+  }
+
   final _$refreshAsyncAction = AsyncAction('refresh');
 
   @override

@@ -18,7 +18,8 @@ class TagRecent extends StatefulWidget {
   _TagRecentState createState() => _TagRecentState();
 }
 
-class _TagRecentState extends State<TagRecent> with AutomaticKeepAliveClientMixin {
+class _TagRecentState extends State<TagRecent>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -36,7 +37,6 @@ class _TagRecentState extends State<TagRecent> with AutomaticKeepAliveClientMixi
 
     ErrorNotifier(context).invoke();
 
-
     _tagRecentStore.refresh(widget.tag.id);
     super.initState();
   }
@@ -45,26 +45,40 @@ class _TagRecentState extends State<TagRecent> with AutomaticKeepAliveClientMixi
   Widget build(BuildContext context) {
     super.build(context);
     return Observer(builder: (_) {
-      if (_tagRecentStore.quotes.isEmpty) {
-        return Center(child: CircularProgressIndicator());
-      } else {
-        return LiquidPullToRefresh(
-          showChildOpacityTransition: false,
-          scrollController: _scrollController,
-          onRefresh: () async {
-            await _tagRecentStore.refresh(widget.tag.id);
-          },
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: _tagRecentStore.quotes.length,
-            itemBuilder: (context, index) {
-              return index + 1 >= _tagRecentStore.quotes.length
-                  ? BottomLoader()
-                  : QuoteWidget(_tagRecentStore.quotes[index]);
-            },
-          ),
+      if (_tagRecentStore.page == 1 && _tagRecentStore.hasReachedEnd) {
+        return Center(
+          child: Text('No Quotes'),
+        );
+      } else if (!_tagRecentStore.hasReachedEnd &&
+          _tagRecentStore.quotes.isEmpty) {
+        return Center(
+          child: CircularProgressIndicator(),
         );
       }
+
+      return LiquidPullToRefresh(
+        showChildOpacityTransition: false,
+        scrollController: _scrollController,
+        onRefresh: () async {
+          await _tagRecentStore.refresh(widget.tag.id);
+        },
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: _tagRecentStore.quotes.length,
+          itemBuilder: (context, index) {
+            return index + 1 >= _tagRecentStore.quotes.length &&
+                    !_tagRecentStore.hasReachedEnd &&
+                    _tagRecentStore.quotes.length > 5
+                ? Column(
+                    children: <Widget>[
+                      QuoteWidget(_tagRecentStore.quotes[index]),
+                      BottomLoader()
+                    ],
+                  )
+                : QuoteWidget(_tagRecentStore.quotes[index]);
+          },
+        ),
+      );
     });
   }
 }

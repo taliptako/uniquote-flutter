@@ -39,19 +39,20 @@ mixin _$MostLikedStore on _MostLikedStore, Store {
     _$pageAtom.reportChanged();
   }
 
-  final _$errorAtom = Atom(name: '_MostLikedStore.error');
+  final _$hasReachedEndAtom = Atom(name: '_MostLikedStore.hasReachedEnd');
 
   @override
-  String get error {
-    _$errorAtom.reportObserved();
-    return super.error;
+  bool get hasReachedEnd {
+    _$hasReachedEndAtom.reportObserved();
+    return super.hasReachedEnd;
   }
 
   @override
-  set error(String value) {
-    _$errorAtom.context.checkIfStateModificationsAreAllowed(_$errorAtom);
-    super.error = value;
-    _$errorAtom.reportChanged();
+  set hasReachedEnd(bool value) {
+    _$hasReachedEndAtom.context
+        .checkIfStateModificationsAreAllowed(_$hasReachedEndAtom);
+    super.hasReachedEnd = value;
+    _$hasReachedEndAtom.reportChanged();
   }
 
   final _$refreshAsyncAction = AsyncAction('refresh');

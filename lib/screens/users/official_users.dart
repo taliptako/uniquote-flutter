@@ -40,6 +40,17 @@ class _OfficialUsersState extends State<OfficialUsers>
   Widget build(BuildContext context) {
     super.build(context);
     return Observer(builder: (_) {
+      if (_officialUsersStore.page == 1 && _officialUsersStore.hasReachedEnd) {
+        return Center(
+          child: Text('No User'),
+        );
+      } else if (!_officialUsersStore.hasReachedEnd &&
+          _officialUsersStore.users.isEmpty) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+
       if (_officialUsersStore.users.isEmpty) {
         return Center(child: CircularProgressIndicator());
       } else {
@@ -53,8 +64,15 @@ class _OfficialUsersState extends State<OfficialUsers>
             controller: _scrollController,
             itemCount: _officialUsersStore.users.length,
             itemBuilder: (context, index) {
-              return index + 1 >= _officialUsersStore.users.length
-                  ? BottomLoader()
+              return index + 1 >= _officialUsersStore.users.length &&
+                      !_officialUsersStore.hasReachedEnd &&
+                      _officialUsersStore.users.length > 5
+                  ? Column(
+                      children: <Widget>[
+                        UserWidget(user: _officialUsersStore.users[index]),
+                        BottomLoader()
+                      ],
+                    )
                   : UserWidget(user: _officialUsersStore.users[index]);
             },
           ),

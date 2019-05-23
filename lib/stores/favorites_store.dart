@@ -14,15 +14,28 @@ abstract class _FavoritesStore implements Store {
   ObservableList<QuoteStore> quotes = ObservableList<QuoteStore>();
 
   @observable
-  bool isCompleted = false;
+  int page = 1;
+
+  @observable
+  bool hasReachedEnd = false;
 
   @action
-  load() async {
-    final result = await _quoteApi.fetchUserFavorites();
+  refresh() async {
+    final result = await _quoteApi.fetchUserFavorites(1);
     if (result is List<QuoteStore>) {
-      isCompleted = true;
-      quotes.clear();
       quotes.addAll(result);
     }
   }
+
+  @action
+  fetch() async {
+    final result = await _quoteApi.fetchUserFavorites(page);
+    if (result.isEmpty) {
+      hasReachedEnd = true;
+    } else {
+      page++;
+      quotes.addAll(result);
+    }
+  }
+
 }

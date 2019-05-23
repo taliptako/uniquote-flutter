@@ -71,13 +71,13 @@ class QuoteApi {
   }
 
 
-  Future<List<QuoteStore>> fetchUserFavorites() async {
-    var body = await _db.get(table, 'favorites');
+  Future<List<QuoteStore>> fetchUserFavorites(int page) async {
+    var body = await _db.get(table, 'favorites$page');
 
     if (body == false) {
-      final r = await dio.get('user_favorites');
+      final r = await dio.get('user_favorites?page=$page');
       body = r.data;
-      await _db.set(table, 'favorites', body);
+      await _db.set(table, 'favorites$page', body);
     }
 
     final json = _db.decode(body);

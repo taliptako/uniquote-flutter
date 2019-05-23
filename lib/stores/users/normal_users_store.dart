@@ -16,6 +16,9 @@ abstract class _NormalUsersStore implements Store {
   @observable
   int page = 1;
 
+  @observable
+  bool hasReachedEnd = false;
+
   @action
   refresh() async {
     final result = await _userApi.fetchNormalUsers(1);
@@ -27,8 +30,12 @@ abstract class _NormalUsersStore implements Store {
 
   @action
   fetch() async {
-    page++;
     final result = await _userApi.fetchNormalUsers(page);
-    users.addAll(result);
+    if (result.isEmpty) {
+      hasReachedEnd = true;
+    } else {
+      page++;
+      users.addAll(result);
+    }
   }
 }

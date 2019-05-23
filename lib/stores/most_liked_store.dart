@@ -17,7 +17,7 @@ abstract class _MostLikedStore implements Store {
   int page = 1;
 
   @observable
-  String error;
+  bool hasReachedEnd = false;
 
   @action
   refresh() async {
@@ -30,9 +30,12 @@ abstract class _MostLikedStore implements Store {
 
   @action
   fetch() async {
-    page++;
     final result = await _quoteApi.fetchMostLiked(page);
-
-    quotes.addAll(result);
+    if (result.isEmpty) {
+      hasReachedEnd = true;
+    } else {
+      page++;
+      quotes.addAll(result);
+    }
   }
 }

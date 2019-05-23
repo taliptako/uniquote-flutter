@@ -16,18 +16,26 @@ abstract class _FeedStore implements Store {
   @observable
   int page = 1;
 
+  @observable
+  bool hasReachedEnd = false;
+
   @action
   refresh() async {
     final result = await _quoteApi.fetchFeed(1);
     if (result is List<QuoteStore>) {
+      quotes.clear();
       quotes.addAll(result);
     }
   }
 
   @action
   fetch() async {
-    page++;
     final result = await _quoteApi.fetchFeed(page);
-    quotes.addAll(result);
+    if (result.isEmpty) {
+      hasReachedEnd = true;
+    } else {
+      page++;
+      quotes.addAll(result);
+    }
   }
 }

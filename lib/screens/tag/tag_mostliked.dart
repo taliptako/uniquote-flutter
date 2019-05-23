@@ -42,26 +42,40 @@ class _TagMostLiked extends State<TagMostLiked>
   Widget build(BuildContext context) {
     super.build(context);
     return Observer(builder: (_) {
-      if (_tagMostLikedStore.quotes.isEmpty) {
-        return Center(child: CircularProgressIndicator());
-      } else {
-        return LiquidPullToRefresh(
-          showChildOpacityTransition: false,
-          scrollController: _scrollController,
-          onRefresh: () async {
-            await _tagMostLikedStore.refresh(widget.tag.id);
-          },
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: _tagMostLikedStore.quotes.length,
-            itemBuilder: (context, index) {
-              return index + 1 >= _tagMostLikedStore.quotes.length
-                  ? BottomLoader()
-                  : QuoteWidget(_tagMostLikedStore.quotes[index]);
-            },
-          ),
+      if (_tagMostLikedStore.page == 1 && _tagMostLikedStore.hasReachedEnd) {
+        return Center(
+          child: Text('No Quotes'),
+        );
+      } else if (!_tagMostLikedStore.hasReachedEnd &&
+          _tagMostLikedStore.quotes.isEmpty) {
+        return Center(
+          child: CircularProgressIndicator(),
         );
       }
+
+      return LiquidPullToRefresh(
+        showChildOpacityTransition: false,
+        scrollController: _scrollController,
+        onRefresh: () async {
+          await _tagMostLikedStore.refresh(widget.tag.id);
+        },
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: _tagMostLikedStore.quotes.length,
+          itemBuilder: (context, index) {
+            return index + 1 >= _tagMostLikedStore.quotes.length &&
+                    !_tagMostLikedStore.hasReachedEnd &&
+                    _tagMostLikedStore.quotes.length > 5
+                ? Column(
+                    children: <Widget>[
+                      QuoteWidget(_tagMostLikedStore.quotes[index]),
+                      BottomLoader()
+                    ],
+                  )
+                : QuoteWidget(_tagMostLikedStore.quotes[index]);
+          },
+        ),
+      );
     });
   }
 }

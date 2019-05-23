@@ -40,26 +40,40 @@ class _MostLikedState extends State<MostLiked>
   Widget build(BuildContext context) {
     super.build(context);
     return Observer(builder: (_) {
-      if (_mostLikedStore.quotes.isEmpty) {
-        return Center(child: CircularProgressIndicator());
-      } else {
-        return LiquidPullToRefresh(
-          showChildOpacityTransition: false,
-          scrollController: _scrollController,
-          onRefresh: () async {
-            await _mostLikedStore.refresh();
-          },
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: _mostLikedStore.quotes.length,
-            itemBuilder: (context, index) {
-              return index + 1 >= _mostLikedStore.quotes.length
-                  ? BottomLoader()
-                  : QuoteWidget(_mostLikedStore.quotes[index]);
-            },
-          ),
+      if (_mostLikedStore.page == 1 && _mostLikedStore.hasReachedEnd) {
+        return Center(
+          child: Text('No Quotes'),
+        );
+      } else if (!_mostLikedStore.hasReachedEnd &&
+          _mostLikedStore.quotes.isEmpty) {
+        return Center(
+          child: CircularProgressIndicator(),
         );
       }
+
+      return LiquidPullToRefresh(
+        showChildOpacityTransition: false,
+        scrollController: _scrollController,
+        onRefresh: () async {
+          await _mostLikedStore.refresh();
+        },
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: _mostLikedStore.quotes.length,
+          itemBuilder: (context, index) {
+            return index + 1 >= _mostLikedStore.quotes.length &&
+                    !_mostLikedStore.hasReachedEnd &&
+                    _mostLikedStore.quotes.length > 5
+                ? Column(
+                    children: <Widget>[
+                      QuoteWidget(_mostLikedStore.quotes[index]),
+                      BottomLoader()
+                    ],
+                  )
+                : QuoteWidget(_mostLikedStore.quotes[index]);
+          },
+        ),
+      );
     });
   }
 }

@@ -39,26 +39,41 @@ class _FeedState extends State<Feed> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     super.build(context);
     return Observer(builder: (_) {
-      if (_feedStore.quotes.isEmpty) {
-        return Center(child: CircularProgressIndicator());
-      } else {
-        return LiquidPullToRefresh(
-          showChildOpacityTransition: false,
-          scrollController: _scrollController,
-          onRefresh: () async {
-            await _feedStore.refresh();
-          },
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: _feedStore.quotes.length,
-            itemBuilder: (context, index) {
-              return index + 1 >= _feedStore.quotes.length
-                  ? BottomLoader()
-                  : QuoteWidget(_feedStore.quotes[index]);
-            },
-          ),
+
+      if (_feedStore.page == 1 && _feedStore.hasReachedEnd) {
+        return Center(
+          child: Text('No Quotes'),
+        );
+      } else if (!_feedStore.hasReachedEnd &&
+          _feedStore.quotes.isEmpty) {
+        return Center(
+          child: CircularProgressIndicator(),
         );
       }
+
+      return LiquidPullToRefresh(
+        showChildOpacityTransition: false,
+        scrollController: _scrollController,
+        onRefresh: () async {
+          await _feedStore.refresh();
+        },
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: _feedStore.quotes.length,
+          itemBuilder: (context, index) {
+            return index + 1 >= _feedStore.quotes.length &&
+                    !_feedStore.hasReachedEnd &&
+                    _feedStore.quotes.length > 5
+                ? Column(
+                    children: <Widget>[
+                      QuoteWidget(_feedStore.quotes[index]),
+                      BottomLoader()
+                    ],
+                  )
+                : QuoteWidget(_feedStore.quotes[index]);
+          },
+        ),
+      );
     });
   }
 }
