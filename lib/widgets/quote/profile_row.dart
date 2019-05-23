@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_advanced_networkimage/provider.dart';
 
+import 'package:uniquote/widgets/quote/bottom_model.dart';
 import 'package:uniquote/config/sl.dart';
 import 'package:uniquote/config/config.dart';
 import 'package:uniquote/models/quote_store.dart';
@@ -21,15 +22,29 @@ class ProfileRow extends StatelessWidget {
           Expanded(
             child: Container(
                 margin: EdgeInsets.only(left: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text('${quote.user.name}',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        )),
-                    _professions()
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('${quote.user.name}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            )),
+                        _professions()
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 5),
+                      child: IconButton(
+                          icon: Icon(Icons.more_vert, size: 30),
+                          onPressed: () {
+                        showModalBottomSheet(
+                            context: context, builder: (context) => BottomModal(quote));
+                      }),
+                    )
                   ],
                 )),
           ),

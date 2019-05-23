@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:uniquote/widgets/quote/profile_row.dart';
 import 'package:uniquote/models/quote_store.dart';
 import 'package:uniquote/widgets/quote/interactions_row.dart';
-import 'package:uniquote/widgets/quote/bottom_model.dart';
 
 class QuoteWidget extends StatelessWidget {
   QuoteWidget(this.quote);
@@ -36,28 +35,22 @@ class QuoteWidget extends StatelessWidget {
   }
 
   _textRow(context) {
-    return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-            context: context, builder: (context) => BottomModal(quote));
-      },
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(7),
-              child: Text(
-                quote.quote,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: "Roboto",
-                  fontSize: 15,
-                ),
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.all(7),
+            child: Text(
+              quote.quote,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: "Roboto",
+                fontSize: 15,
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
