@@ -38,6 +38,7 @@ class _MostLikedState extends State<MostLiked>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Observer(builder: (_) {
       if (_mostLikedStore.quotes.isEmpty) {
         return Center(child: CircularProgressIndicator());

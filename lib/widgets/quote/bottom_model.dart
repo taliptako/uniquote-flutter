@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:share/share.dart';
 
+import 'package:uniquote/scaffolds/report.dart';
 import 'package:uniquote/models/quote_store.dart';
 
 class BottomModal extends StatelessWidget {
@@ -20,7 +21,7 @@ class BottomModal extends StatelessWidget {
             ListTile(
               onTap: () {
                 Navigator.pushNamed(context, '/report',
-                    arguments: Container());
+                    arguments: Report(data: quote, type: "quote"));
               },
               leading: Icon(Icons.report),
               title: Text('Report'),

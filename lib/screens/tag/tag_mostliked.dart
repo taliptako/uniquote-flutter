@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-import 'package:uniquote/components/error_notifier.dart';
 import 'package:uniquote/stores/tag/tag_mostliked_store.dart';
 import 'package:uniquote/models/tag_model.dart';
 import 'package:uniquote/widgets/quote/quote_widget.dart';
@@ -41,6 +40,7 @@ class _TagMostLiked extends State<TagMostLiked>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Observer(builder: (_) {
       if (_tagMostLikedStore.quotes.isEmpty) {
         return Center(child: CircularProgressIndicator());

@@ -14,7 +14,7 @@ class AuthApi {
       final json = jsonDecode(r.data);
 
       return AbstractUserStore.fromJson(json['data']);
-    } on DioError catch (e) {
+    } on DioError {
       return false;
     }
   }
@@ -32,7 +32,7 @@ class AuthApi {
       final json = jsonDecode(r.data);
 
       return AbstractUserStore.fromJson(json['data']);
-    } on DioError catch (e) {
+    } on DioError {
       return false;
     }
   }

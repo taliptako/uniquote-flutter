@@ -43,6 +43,7 @@ class _TagRecentState extends State<TagRecent> with AutomaticKeepAliveClientMixi
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Observer(builder: (_) {
       if (_tagRecentStore.quotes.isEmpty) {
         return Center(child: CircularProgressIndicator());

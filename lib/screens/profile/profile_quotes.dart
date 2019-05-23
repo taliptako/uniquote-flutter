@@ -44,7 +44,7 @@ class _ProfileQuotesState extends State<ProfileQuotes> {
             child: Text('No Quotes'),
           ),
         );
-      } else if (!_profileStore.hasReachedEnd && _profileStore.quotes.isEmpty){
+      } else if (!_profileStore.hasReachedEnd && _profileStore.quotes.isEmpty) {
         return SliverToBoxAdapter(
           child: Center(
             child: CircularProgressIndicator(),
@@ -55,8 +55,13 @@ class _ProfileQuotesState extends State<ProfileQuotes> {
       return SliverList(
         delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
           return index + 1 >= _profileStore.quotes.length &&
-                  !_profileStore.hasReachedEnd
-              ? BottomLoader()
+                  !_profileStore.hasReachedEnd && _profileStore.quotes.length > 5
+              ? Column(
+                  children: <Widget>[
+                    QuoteWidget(_profileStore.quotes[index]),
+                    BottomLoader()
+                  ],
+                )
               : QuoteWidget(_profileStore.quotes[index]);
         }, childCount: _profileStore.quotes.length),
       );

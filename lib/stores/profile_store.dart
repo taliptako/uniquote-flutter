@@ -22,7 +22,7 @@ abstract class _ProfileStore implements Store {
   @action
   fetch(int id) async {
     final result = await _quoteApi.fetchUserQuotes(id, page);
-    if (result is List<QuoteStore>) {
+    if (result is List<QuoteStore> ) {
       if (result.isEmpty) {
         hasReachedEnd = true;
       } else {

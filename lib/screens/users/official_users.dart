@@ -38,6 +38,7 @@ class _OfficialUsersState extends State<OfficialUsers>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Observer(builder: (_) {
       if (_officialUsersStore.users.isEmpty) {
         return Center(child: CircularProgressIndicator());

@@ -37,6 +37,7 @@ class _NormalUsersState extends State<NormalUsers> with AutomaticKeepAliveClient
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Observer(builder: (_) {
       if (_normalUsersStore.users.isEmpty) {
         return Center(child: CircularProgressIndicator());

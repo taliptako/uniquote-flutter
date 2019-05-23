@@ -11,6 +11,7 @@ import 'package:uniquote/scaffolds/users.dart';
 import 'package:uniquote/scaffolds/tabs.dart';
 import 'package:uniquote/scaffolds/about.dart';
 import 'package:uniquote/scaffolds/profile.dart';
+import 'package:uniquote/scaffolds/report.dart';
 import 'package:uniquote/components/webview_holder.dart';
 
 class RouteGenerator {
@@ -69,6 +70,14 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => TagList(
                   tag: args,
+                ));
+
+      case '/report':
+        final Report args = settings.arguments;
+        return MaterialPageRoute(
+            builder: (_) => Report(
+                  type: args.type,
+                  data: args.data,
                 ));
 
       default:

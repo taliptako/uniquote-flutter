@@ -37,6 +37,7 @@ class _FeedState extends State<Feed> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Observer(builder: (_) {
       if (_feedStore.quotes.isEmpty) {
         return Center(child: CircularProgressIndicator());
