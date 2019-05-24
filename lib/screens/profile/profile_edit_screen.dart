@@ -6,21 +6,19 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 import 'package:uniquote/config/sl.dart';
 import 'package:uniquote/stores/root_store.dart';
-import 'package:uniquote/config/config.dart';
 import 'package:uniquote/models/user_store.dart';
+import 'package:uniquote/config/config.dart';
 import 'package:uniquote/data/user_api.dart';
 
 class ProfileEditScreen extends StatefulWidget {
-  final UserStore user;
-
-  const ProfileEditScreen({Key key, this.user}) : super(key: key);
-
   @override
   _ProfileEditScreenState createState() => _ProfileEditScreenState();
 }
 
 class _ProfileEditScreenState extends State<ProfileEditScreen> {
   RootStore _rootStore = sl<RootStore>();
+  UserStore user = sl<RootStore>().user;
+
   Config _config = sl<Config>();
 
   UserApi _userApi = UserApi();
@@ -42,7 +40,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         child: Form(
           key: _editForm,
           child: ListView(
-            children: <Widget>[],
+            children: <Widget>[buildAvatar(), buildFields()],
           ),
         ));
   }
@@ -53,7 +51,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         TextFormField(
           enabled: false,
           decoration: InputDecoration(
-            labelText: '${widget.user.email}',
+            labelText: '${user.email}',
             icon: Icon(Icons.email),
             labelStyle: TextStyle(color: Colors.black),
           ),
@@ -61,14 +59,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         TextFormField(
           enabled: false,
           decoration: InputDecoration(
-            labelText: '${widget.user.name}',
+            labelText: '${user.name}',
             icon: Icon(Icons.grade),
             labelStyle: TextStyle(color: Colors.black),
           ),
         ),
         DateTimePickerFormField(
           inputType: InputType.date,
-          initialValue: widget.user.born,
+          initialValue: user.born,
           format: DateFormat('yyyy-MM-dd'),
           editable: true,
           decoration: InputDecoration(
@@ -94,6 +92,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             color: Colors.deepPurple,
             onPressed: () async {
               _editForm.currentState.save();
+
+              await _userApi.updateProfile(
+                  avatar: _image, bio: bio, birthDay: date);
             },
             child: Text(
               'Submit',
@@ -106,7 +107,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   }
 
   GestureDetector buildAvatar() {
-    if (widget.user.avatarLg == null && _image == null) {
+    if (user.avatarLg == null && _image == null) {
       return GestureDetector(
         onTap: () async {
           var image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -164,7 +165,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       )),
                   radius: 60,
                   backgroundImage:
-                      NetworkImage(_config.storageUrl + widget.user.avatarLg),
+                      NetworkImage(_config.storageUrl + user.avatarLg),
                 ),
         ],
       ),

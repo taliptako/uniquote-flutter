@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:uniquote/config/http.dart';
 import 'package:uniquote/data/storage/db.dart';
 import 'package:uniquote/models/user_store.dart';
@@ -60,5 +62,22 @@ class UserApi {
       return true;
     }
     return false;
+  }
+
+  Future updateProfile({DateTime birthDay, String bio, avatar}) async {
+    Map data = {};
+    if (birthDay != null) {
+      data.addAll({'born': birthDay});
+    }
+    if (bio != null) {
+      data.addAll({'bio': bio});
+    }
+    if (avatar != null) {
+      avatar = base64Encode(avatar.readAsBytesSync());
+    }
+
+    final r = await dio.post('profile', data: data);
+
+    print(r);
   }
 }

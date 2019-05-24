@@ -16,6 +16,7 @@ import 'package:uniquote/scaffolds/tag.dart';
 import 'package:uniquote/scaffolds/tag_list.dart';
 import 'package:uniquote/scaffolds/users.dart';
 import 'package:uniquote/scaffolds/profile.dart';
+import 'package:uniquote/scaffolds/profile_edit.dart';
 
 import 'package:uniquote/scaffolds/favorites.dart';
 import 'package:uniquote/scaffolds/about.dart';
@@ -68,6 +69,9 @@ class RouteGenerator {
             builder: (_) => Profile(
                   user: args,
                 ));
+
+      case '/profile_edit':
+        return MaterialPageRoute(builder: (_) => ProfileEdit());
 
       case '/webview':
         final WebViewHolder args = settings.arguments;
