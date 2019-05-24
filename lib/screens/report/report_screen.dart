@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:achievement_view/achievement_view.dart';
 import 'package:edge_alert/edge_alert.dart';
 
-import 'package:uniquote/components/progress.dart';
 import 'package:uniquote/data/report_api.dart';
 
 class ReportScreen extends StatefulWidget {

@@ -12,7 +12,7 @@ part 'quote_store.g.dart';
 class QuoteStore = AbstractQuoteStore with _$QuoteStore;
 
 // The store-class
-abstract class AbstractQuoteStore implements Store {
+abstract class AbstractQuoteStore with Store {
   final QuoteApi _quoteApi = QuoteApi();
   final RootStore _rootStore = sl<RootStore>();
 

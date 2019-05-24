@@ -7,7 +7,7 @@ part 'tag_recent_store.g.dart';
 
 class TagRecentStore = _TagRecentStore with _$TagRecentStore;
 
-abstract class _TagRecentStore implements Store {
+abstract class _TagRecentStore with Store {
   final QuoteApi _quoteApi = QuoteApi();
 
   @observable

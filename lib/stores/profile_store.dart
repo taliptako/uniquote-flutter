@@ -7,7 +7,7 @@ part 'profile_store.g.dart';
 
 class ProfileStore = _ProfileStore with _$ProfileStore;
 
-abstract class _ProfileStore implements Store {
+abstract class _ProfileStore with Store {
   final QuoteApi _quoteApi = QuoteApi();
 
   @observable

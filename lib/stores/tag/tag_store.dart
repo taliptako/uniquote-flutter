@@ -7,7 +7,7 @@ part 'tag_store.g.dart';
 
 class TagStore = _TagStore with _$TagStore;
 
-abstract class _TagStore implements Store {
+abstract class _TagStore with Store {
   TagApi _tagApi = TagApi();
 
   @observable

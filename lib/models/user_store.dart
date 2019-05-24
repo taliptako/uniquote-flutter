@@ -10,7 +10,7 @@ part 'user_store.g.dart';
 class UserStore = AbstractUserStore with _$UserStore;
 
 // The store-class
-abstract class AbstractUserStore implements Store {
+abstract class AbstractUserStore with Store {
   final UserApi _userApi = UserApi();
 
   final int id;

@@ -7,7 +7,7 @@ part 'normal_users_store.g.dart';
 
 class NormalUsersStore = _NormalUsersStore with _$NormalUsersStore;
 
-abstract class _NormalUsersStore implements Store {
+abstract class _NormalUsersStore with Store {
   final UserApi _userApi = UserApi();
 
   @observable

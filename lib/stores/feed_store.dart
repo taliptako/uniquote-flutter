@@ -7,7 +7,7 @@ part 'feed_store.g.dart';
 
 class FeedStore = _FeedStore with _$FeedStore;
 
-abstract class _FeedStore implements Store {
+abstract class _FeedStore with Store {
   final QuoteApi _quoteApi = QuoteApi();
 
   @observable

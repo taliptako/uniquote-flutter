@@ -7,7 +7,7 @@ part 'favorites_store.g.dart';
 
 class FavoritesStore = _FavoritesStore with _$FavoritesStore;
 
-abstract class _FavoritesStore implements Store {
+abstract class _FavoritesStore with Store {
   final QuoteApi _quoteApi = QuoteApi();
 
   @observable

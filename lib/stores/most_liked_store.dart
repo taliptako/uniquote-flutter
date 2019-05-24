@@ -7,7 +7,7 @@ part 'most_liked_store.g.dart';
 
 class MostLikedStore = _MostLikedStore with _$MostLikedStore;
 
-abstract class _MostLikedStore implements Store {
+abstract class _MostLikedStore with Store {
   final QuoteApi _quoteApi = QuoteApi();
 
   @observable

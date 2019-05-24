@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/scaffolds/home.dart';
-import 'package:uniquote/scaffolds/tag.dart';
+import 'package:uniquote/config/sl.dart';
+import 'package:uniquote/stores/root_store.dart';
+
+import 'package:uniquote/components/webview_holder.dart';
+
 import 'package:uniquote/screens/auth/auth_check.dart';
+
 import 'package:uniquote/scaffolds/register.dart';
 import 'package:uniquote/scaffolds/login.dart';
-import 'package:uniquote/scaffolds/tag_list.dart';
-import 'package:uniquote/scaffolds/favorites.dart';
-import 'package:uniquote/scaffolds/users.dart';
+
 import 'package:uniquote/scaffolds/tabs.dart';
-import 'package:uniquote/scaffolds/about.dart';
+import 'package:uniquote/scaffolds/home.dart';
+import 'package:uniquote/scaffolds/tag.dart';
+import 'package:uniquote/scaffolds/tag_list.dart';
+import 'package:uniquote/scaffolds/users.dart';
 import 'package:uniquote/scaffolds/profile.dart';
+
+import 'package:uniquote/scaffolds/favorites.dart';
+import 'package:uniquote/scaffolds/about.dart';
 import 'package:uniquote/scaffolds/report.dart';
-import 'package:uniquote/components/webview_holder.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -44,7 +51,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Users());
 
       case '3':
-        return MaterialPageRoute(builder: (_) => Users());
+        if (sl<RootStore>().user != null) {
+          return MaterialPageRoute(
+              builder: (_) => Profile(user: sl<RootStore>().user));
+        }
+        return MaterialPageRoute(builder: (_) => Profile());
 
       case '/favorites':
         return MaterialPageRoute(builder: (_) => Favorites());

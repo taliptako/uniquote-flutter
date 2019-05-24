@@ -8,7 +8,7 @@ part 'root_store.g.dart';
 
 class RootStore = _RootStore with _$RootStore;
 
-abstract class _RootStore implements Store {
+abstract class _RootStore with Store {
   @observable
   UserStore user;
 
