@@ -31,7 +31,7 @@ class _FeedState extends State<Feed> with AutomaticKeepAliveClientMixin {
 
     ErrorNotifier(context).invoke();
 
-    _feedStore.refresh();
+    _feedStore.fetch();
     super.initState();
   }
 

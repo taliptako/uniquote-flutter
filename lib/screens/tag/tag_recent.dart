@@ -37,7 +37,7 @@ class _TagRecentState extends State<TagRecent>
 
     ErrorNotifier(context).invoke();
 
-    _tagRecentStore.refresh(widget.tag.id);
+    _tagRecentStore.fetch(widget.tag.id);
     super.initState();
   }
 

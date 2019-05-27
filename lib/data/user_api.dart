@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:uniquote/config/http.dart';
 import 'package:uniquote/data/storage/db.dart';
 import 'package:uniquote/models/user_store.dart';
+import 'package:uniquote/models/tag_model.dart';
+import 'package:uniquote/models/user_dropdown.dart';
 
 class UserApi {
   DB _db = DB();
@@ -62,6 +64,58 @@ class UserApi {
       return true;
     }
     return false;
+  }
+
+  Future<List<UserStore>> fetchUserFollowings(int id, int page) async {
+    var body = await _db.get(table, '${id}_followings$page');
+
+    if (body == false) {
+      final r = await dio.get('user/$id/followings?page=$page');
+      body = r.data;
+      await _db.set(table, '${id}_followings$page', body);
+    }
+
+    final json = _db.decode(body);
+
+    return json['data']
+        .map<UserStore>((json) => AbstractUserStore.fromJson(json))
+        .toList();
+  }
+
+  Future<List<UserStore>> fetchUserFollowers(int id, int page) async {
+    var body = await _db.get(table, '${id}_followers$page');
+
+    if (body == false) {
+      final r = await dio.get('user/$id/followers?page=$page');
+      body = r.data;
+      await _db.set(table, '${id}_followers$page', body);
+    }
+
+    final json = _db.decode(body);
+
+    return json['data']
+        .map<UserStore>((json) => AbstractUserStore.fromJson(json))
+        .toList();
+  }
+
+  Future<List<UserDropdown>> fetchFavoritedUsers() async {
+    final r = await dio.get('favorited_users');
+
+    final json = _db.decode(r.data);
+
+    return json['data']
+        .map<UserDropdown>((json) => UserDropdown.fromJson(json))
+        .toList();
+  }
+
+  Future<List<Tag>> fetchFavoritedTags() async {
+    final r = await dio.get('favorited_tags');
+
+    final json = _db.decode(r.data);
+
+    return json['data']
+        .map<Tag>((json) => Tag.fromJson(json))
+        .toList();
   }
 
   Future updateProfile({DateTime birthDay, String bio, avatar}) async {

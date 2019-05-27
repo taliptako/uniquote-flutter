@@ -37,6 +37,7 @@ dependencies:
 
   liquid_pull_to_refresh: ^1.1.0
   bottom_navy_bar: ^4.2.0
+  flutter_tags: ^0.3.1
 
   edge_alert: ^0.0.1
   achievement_view: ^0.1.2

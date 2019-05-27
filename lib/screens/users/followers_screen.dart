@@ -3,22 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
+import 'package:uniquote/models/user_store.dart';
 import 'package:uniquote/components/error_notifier.dart';
-import 'package:uniquote/stores/users/normal_users_store.dart';
+import 'package:uniquote/stores/users/followers_store.dart';
 import 'package:uniquote/widgets/bottom_loader.dart';
 import 'package:uniquote/widgets/user/user_widget.dart';
 
-class NormalUsers extends StatefulWidget {
+class FollowersScreen extends StatefulWidget {
+  final UserStore user;
+
+  const FollowersScreen({Key key, this.user}) : super(key: key);
+
   @override
-  _NormalUsersState createState() => _NormalUsersState();
+  _FollowersScreenState createState() => _FollowersScreenState();
 }
 
-class _NormalUsersState extends State<NormalUsers>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-
-  NormalUsersStore _normalUsersStore = NormalUsersStore();
+class _FollowersScreenState extends State<FollowersScreen> {
+  FollowersStore _followersStore = FollowersStore();
   final _scrollController = ScrollController();
 
   @override
@@ -26,26 +27,25 @@ class _NormalUsersState extends State<NormalUsers>
     _scrollController.addListener(() async {
       final maxScroll = _scrollController.position.maxScrollExtent;
       if (maxScroll == _scrollController.position.pixels) {
-        await _normalUsersStore.fetch();
+        await _followersStore.fetch(widget.user.id);
       }
     });
 
     ErrorNotifier(context).invoke();
 
-    _normalUsersStore.fetch();
+    _followersStore.fetch(widget.user.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Observer(builder: (_) {
-      if (_normalUsersStore.page == 1 && _normalUsersStore.hasReachedEnd) {
+      if (_followersStore.page == 1 && _followersStore.hasReachedEnd) {
         return Center(
           child: Text('No User'),
         );
-      } else if (!_normalUsersStore.hasReachedEnd &&
-          _normalUsersStore.users.isEmpty) {
+      } else if (!_followersStore.hasReachedEnd &&
+          _followersStore.users.isEmpty) {
         return Center(
           child: CircularProgressIndicator(),
         );
@@ -55,22 +55,22 @@ class _NormalUsersState extends State<NormalUsers>
         showChildOpacityTransition: false,
         scrollController: _scrollController,
         onRefresh: () async {
-          await _normalUsersStore.refresh();
+          await _followersStore.refresh(widget.user.id);
         },
         child: ListView.builder(
           controller: _scrollController,
-          itemCount: _normalUsersStore.users.length,
+          itemCount: _followersStore.users.length,
           itemBuilder: (context, index) {
-            return index + 1 >= _normalUsersStore.users.length &&
-                    !_normalUsersStore.hasReachedEnd &&
-                    _normalUsersStore.users.length > 5
+            return index + 1 >= _followersStore.users.length &&
+                    !_followersStore.hasReachedEnd &&
+                    _followersStore.users.length > 5
                 ? Column(
                     children: <Widget>[
-                      UserWidget(user: _normalUsersStore.users[index]),
+                      UserWidget(user: _followersStore.users[index]),
                       BottomLoader()
                     ],
                   )
-                : UserWidget(user: _normalUsersStore.users[index]);
+                : UserWidget(user: _followersStore.users[index]);
           },
         ),
       );

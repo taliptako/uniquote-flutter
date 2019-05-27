@@ -34,23 +34,28 @@ class QuoteWidget extends StatelessWidget {
     );
   }
 
-  _textRow(context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.all(7),
-            child: Text(
-              quote.quote,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: "Roboto",
-                fontSize: 15,
+  GestureDetector _textRow(context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/quote_detail', arguments: quote);
+      },
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(7),
+              child: Text(
+                quote.quote,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "Roboto",
+                  fontSize: 15,
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

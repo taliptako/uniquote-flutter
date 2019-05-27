@@ -32,7 +32,7 @@ class _MostLikedState extends State<MostLiked>
 
     ErrorNotifier(context).invoke();
 
-    _mostLikedStore.refresh();
+    _mostLikedStore.fetch();
     super.initState();
   }
 

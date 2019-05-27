@@ -37,27 +37,41 @@ class _ProfileSectionState extends State<ProfileSection> {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Text("${widget.user.followerCount}",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold)),
-                            Text(
-                              'Followers',
-                              style: TextStyle(color: Colors.grey),
-                            )
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/followers',
+                                arguments: widget.user);
+                          },
+                          child: Column(
+                            children: <Widget>[
+                              Text("${widget.user.followerCount}",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold)),
+                              Text(
+                                'Followers',
+                                style: TextStyle(color: Colors.grey),
+                              )
+                            ],
+                          ),
                         ),
-                        Column(
-                          children: <Widget>[
-                            Text("${widget.user.followingCount}",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold)),
-                            Text(
-                              'Followings',
-                              style: TextStyle(color: Colors.grey),
-                            )
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/followings',
+                                arguments: widget.user);
+                          },
+                          child: Column(
+                            children: <Widget>[
+                              Text("${widget.user.followingCount}",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold)),
+                              Text(
+                                'Followings',
+                                style: TextStyle(color: Colors.grey),
+                              )
+                            ],
+                          ),
                         ),
                         Column(
                           children: <Widget>[

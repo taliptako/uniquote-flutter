@@ -32,7 +32,7 @@ class _OfficialUsersState extends State<OfficialUsers>
 
     ErrorNotifier(context).invoke();
 
-    _officialUsersStore.refresh();
+    _officialUsersStore.fetch();
     super.initState();
   }
 

@@ -12,10 +12,6 @@ class Users extends StatelessWidget {
       child: Scaffold(
         drawer: DrawerWidget(),
         bottomNavigationBar: BottomNavigation(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Icon(Icons.add),
-        ),
         appBar: AppBar(
           title: Text('Users'),
           bottom: TabBar(

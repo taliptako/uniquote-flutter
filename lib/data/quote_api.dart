@@ -70,17 +70,20 @@ class QuoteApi {
         .toList();
   }
 
-
-  Future<List<QuoteStore>> fetchUserFavorites(int page) async {
-    var body = await _db.get(table, 'favorites$page');
-
-    if (body == false) {
-      final r = await dio.get('user_favorites?page=$page');
-      body = r.data;
-      await _db.set(table, 'favorites$page', body);
+  Future<List<QuoteStore>> fetchUserFavorites(int page,
+      {int userId, int tagId}) async {
+    Map<String, int> data = {'page': page};
+    if (userId != null) {
+      data.addAll({'user_id': userId});
+    }
+    if (tagId != null) {
+      data.addAll({'tag_id': tagId});
     }
 
-    final json = _db.decode(body);
+    print(data);
+    final r = await dio.get('user_favorites', queryParameters: data);
+
+    final json = _db.decode(r.data);
 
     return json['data']
         .map<QuoteStore>((json) => AbstractQuoteStore.fromJson(json))

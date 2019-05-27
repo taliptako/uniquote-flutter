@@ -34,7 +34,7 @@ class _TagMostLiked extends State<TagMostLiked>
       }
     });
 
-    _tagMostLikedStore.refresh(widget.tag.id);
+    _tagMostLikedStore.fetch(widget.tag.id);
     super.initState();
   }
 

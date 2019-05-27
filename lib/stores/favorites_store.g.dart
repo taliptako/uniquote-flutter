@@ -55,6 +55,80 @@ mixin _$FavoritesStore on _FavoritesStore, Store {
     _$hasReachedEndAtom.reportChanged();
   }
 
+  final _$usersAtom = Atom(name: '_FavoritesStore.users');
+
+  @override
+  ObservableList<UserDropdown> get users {
+    _$usersAtom.reportObserved();
+    return super.users;
+  }
+
+  @override
+  set users(ObservableList<UserDropdown> value) {
+    _$usersAtom.context.checkIfStateModificationsAreAllowed(_$usersAtom);
+    super.users = value;
+    _$usersAtom.reportChanged();
+  }
+
+  final _$tagsAtom = Atom(name: '_FavoritesStore.tags');
+
+  @override
+  ObservableList<Tag> get tags {
+    _$tagsAtom.reportObserved();
+    return super.tags;
+  }
+
+  @override
+  set tags(ObservableList<Tag> value) {
+    _$tagsAtom.context.checkIfStateModificationsAreAllowed(_$tagsAtom);
+    super.tags = value;
+    _$tagsAtom.reportChanged();
+  }
+
+  final _$userIdAtom = Atom(name: '_FavoritesStore.userId');
+
+  @override
+  int get userId {
+    _$userIdAtom.reportObserved();
+    return super.userId;
+  }
+
+  @override
+  set userId(int value) {
+    _$userIdAtom.context.checkIfStateModificationsAreAllowed(_$userIdAtom);
+    super.userId = value;
+    _$userIdAtom.reportChanged();
+  }
+
+  final _$tagIdAtom = Atom(name: '_FavoritesStore.tagId');
+
+  @override
+  int get tagId {
+    _$tagIdAtom.reportObserved();
+    return super.tagId;
+  }
+
+  @override
+  set tagId(int value) {
+    _$tagIdAtom.context.checkIfStateModificationsAreAllowed(_$tagIdAtom);
+    super.tagId = value;
+    _$tagIdAtom.reportChanged();
+  }
+
+  final _$fetchUsersAsyncAction = AsyncAction('fetchUsers');
+
+  @override
+  Future fetchUsers() {
+    return _$fetchUsersAsyncAction.run(() => super.fetchUsers());
+  }
+
+  final _$fetchTagsAsyncAction = AsyncAction('fetchTags');
+
+  @override
+  Future fetchTags() {
+    return _$fetchTagsAsyncAction.run(() => super.fetchTags());
+  }
+
   final _$refreshAsyncAction = AsyncAction('refresh');
 
   @override
@@ -67,5 +141,19 @@ mixin _$FavoritesStore on _FavoritesStore, Store {
   @override
   Future fetch() {
     return _$fetchAsyncAction.run(() => super.fetch());
+  }
+
+  final _$changeUserAsyncAction = AsyncAction('changeUser');
+
+  @override
+  Future changeUser(int id) {
+    return _$changeUserAsyncAction.run(() => super.changeUser(id));
+  }
+
+  final _$changeTagAsyncAction = AsyncAction('changeTag');
+
+  @override
+  Future changeTag(int id) {
+    return _$changeTagAsyncAction.run(() => super.changeTag(id));
   }
 }

@@ -17,6 +17,9 @@ import 'package:uniquote/scaffolds/tag_list.dart';
 import 'package:uniquote/scaffolds/users.dart';
 import 'package:uniquote/scaffolds/profile.dart';
 import 'package:uniquote/scaffolds/profile_edit.dart';
+import 'package:uniquote/scaffolds/quote_detail.dart';
+import 'package:uniquote/scaffolds/followers.dart';
+import 'package:uniquote/scaffolds/followings.dart';
 
 import 'package:uniquote/scaffolds/favorites.dart';
 import 'package:uniquote/scaffolds/about.dart';
@@ -58,11 +61,29 @@ class RouteGenerator {
         }
         return MaterialPageRoute(builder: (_) => Profile());
 
+      case '/quote_detail':
+        return MaterialPageRoute(
+            builder: (_) => QuoteDetail(
+                  quote: args,
+                ));
+
       case '/favorites':
         return MaterialPageRoute(builder: (_) => Favorites());
 
       case '/about':
         return MaterialPageRoute(builder: (_) => About());
+
+      case '/followers':
+        return MaterialPageRoute(
+            builder: (_) => Followers(
+                  user: args,
+                ));
+
+      case '/followings':
+        return MaterialPageRoute(
+            builder: (_) => Followings(
+                  user: args,
+                ));
 
       case '/profile':
         return MaterialPageRoute(
