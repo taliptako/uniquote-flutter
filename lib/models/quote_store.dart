@@ -1,9 +1,9 @@
 import 'package:mobx/mobx.dart';
 
-import 'package:uniquote/config/sl.dart';
-import 'package:uniquote/stores/root_store.dart';
-import 'package:uniquote/models/user_store.dart';
-import 'package:uniquote/data/quote_api.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
+import 'package:uniquote_flutter/data/quote_api.dart';
 
 // Include generated file
 part 'quote_store.g.dart';

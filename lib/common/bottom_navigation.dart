@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
-import 'package:uniquote/config/sl.dart';
-import 'package:uniquote/stores/root_store.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
 
 class BottomNavigation extends StatelessWidget {
   final RootStore rootStore = sl<RootStore>();

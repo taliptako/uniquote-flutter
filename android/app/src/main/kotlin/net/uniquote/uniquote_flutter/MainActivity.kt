@@ -1,4 +1,4 @@
-package net.uniquote.uniquote
+package net.uniquote.uniquote_flutter
 
 import android.os.Bundle
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/widgets/quote/profile_row.dart';
-import 'package:uniquote/models/quote_store.dart';
-import 'package:uniquote/widgets/quote/interactions_row.dart';
+import 'package:uniquote_flutter/widgets/quote/profile_row.dart';
+import 'package:uniquote_flutter/models/quote_store.dart';
+import 'package:uniquote_flutter/widgets/quote/interactions_row.dart';
 
 class QuoteWidget extends StatelessWidget {
   QuoteWidget(this.quote);

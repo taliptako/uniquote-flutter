@@ -3,11 +3,11 @@ import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
 
-import 'package:uniquote/config/http.dart';
-import 'package:uniquote/config/sl.dart';
-import 'package:uniquote/stores/root_store.dart';
-import 'package:uniquote/config/config.dart';
-import 'package:uniquote/app.dart';
+import 'package:uniquote_flutter/config/http.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
+import 'package:uniquote_flutter/config/config.dart';
+import 'package:uniquote_flutter/app.dart';
 
 void main() {
   if (kReleaseMode && 1 == 2) {

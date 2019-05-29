@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:uniquote/stores/tag/tag_store.dart';
-import 'package:uniquote/widgets/tag_widget.dart';
+import 'package:uniquote_flutter/stores/tag/tag_store.dart';
+import 'package:uniquote_flutter/widgets/tag_widget.dart';
 
 class TagScreen extends StatefulWidget {
   @override

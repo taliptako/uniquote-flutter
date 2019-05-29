@@ -1,6 +1,6 @@
-import 'package:uniquote/config/http.dart';
-import 'package:uniquote/data/storage/db.dart';
-import 'package:uniquote/models/quote_store.dart';
+import 'package:uniquote_flutter/config/http.dart';
+import 'package:uniquote_flutter/data/storage/db.dart';
+import 'package:uniquote_flutter/models/quote_store.dart';
 
 class QuoteApi {
   DB _db = DB();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/models/quote_store.dart';
-import 'package:uniquote/widgets/quote/quote_widget.dart';
-import 'package:uniquote/widgets/comment/comment_widget.dart';
+import 'package:uniquote_flutter/models/quote_store.dart';
+import 'package:uniquote_flutter/widgets/quote/quote_widget.dart';
+import 'package:uniquote_flutter/widgets/comment/comment_widget.dart';
 
 class QuoteDetailScreen extends StatelessWidget {
   final QuoteStore quote;

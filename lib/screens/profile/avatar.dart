@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_advanced_networkimage/provider.dart';
 
-import 'package:uniquote/config/sl.dart';
-import 'package:uniquote/config/config.dart';
-import 'package:uniquote/models/user_store.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/config/config.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
 
 class Avatar extends StatelessWidget {
   final Config config = sl<Config>();

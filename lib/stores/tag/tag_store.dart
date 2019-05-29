@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
-import 'package:uniquote/models/tag_model.dart';
-import 'package:uniquote/data/tag_api.dart';
+import 'package:uniquote_flutter/models/tag_model.dart';
+import 'package:uniquote_flutter/data/tag_api.dart';
 
 part 'tag_store.g.dart';
 

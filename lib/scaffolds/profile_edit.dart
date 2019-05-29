@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/screens/profile/profile_edit_screen.dart';
+import 'package:uniquote_flutter/screens/profile/profile_edit_screen.dart';
 
 class ProfileEdit extends StatelessWidget {
   @override

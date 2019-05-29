@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
-import 'package:uniquote/data/user_api.dart';
-import 'package:uniquote/models/user_store.dart';
+import 'package:uniquote_flutter/data/user_api.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
 
 part 'normal_users_store.g.dart';
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:random_color/random_color.dart';
 
-import 'package:uniquote/models/tag_model.dart';
-import 'package:uniquote/stores/tag/tag_store.dart';
+import 'package:uniquote_flutter/models/tag_model.dart';
+import 'package:uniquote_flutter/stores/tag/tag_store.dart';
 
 class TagWidget extends StatelessWidget {
   TagWidget({this.tagStore, this.index, this.tag, this.text});

@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import 'package:uniquote/config/http.dart';
-import 'package:uniquote/controllers/firebase_controller.dart';
-import 'package:uniquote/config/sl.dart';
-import 'package:uniquote/stores/root_store.dart';
-import 'package:uniquote/models/user_store.dart';
-import 'package:uniquote/data/auth_api.dart';
+import 'package:uniquote_flutter/config/http.dart';
+import 'package:uniquote_flutter/controllers/firebase_controller.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
+import 'package:uniquote_flutter/data/auth_api.dart';
 
 class AuthController {
   final _storage = FlutterSecureStorage();

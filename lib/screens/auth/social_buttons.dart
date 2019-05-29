@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
-import 'package:uniquote/components/progress.dart';
-import 'package:uniquote/controllers/auth_controller.dart';
+import 'package:uniquote_flutter/components/progress.dart';
+import 'package:uniquote_flutter/controllers/auth_controller.dart';
 
 class SocialButtons extends StatelessWidget {
   final AuthController _authController = AuthController();

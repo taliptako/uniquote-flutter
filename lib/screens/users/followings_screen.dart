@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-import 'package:uniquote/models/user_store.dart';
-import 'package:uniquote/components/error_notifier.dart';
-import 'package:uniquote/stores/users/followings_store.dart';
-import 'package:uniquote/widgets/bottom_loader.dart';
-import 'package:uniquote/widgets/user/user_widget.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
+import 'package:uniquote_flutter/components/error_notifier.dart';
+import 'package:uniquote_flutter/stores/users/followings_store.dart';
+import 'package:uniquote_flutter/widgets/bottom_loader.dart';
+import 'package:uniquote_flutter/widgets/user/user_widget.dart';
 
 class FollowingsScreen extends StatefulWidget {
   final UserStore user;

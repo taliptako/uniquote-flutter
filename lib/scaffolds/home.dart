@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/common/common.dart';
-import 'package:uniquote/screens/feed.dart';
-import 'package:uniquote/screens/most_liked.dart';
+import 'package:uniquote_flutter/common/common.dart';
+import 'package:uniquote_flutter/screens/feed.dart';
+import 'package:uniquote_flutter/screens/most_liked.dart';
 
 class Home extends StatelessWidget {
   @override

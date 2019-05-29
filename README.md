@@ -1,4 +1,4 @@
-# uniquote
+# uniquote_flutter
 
 UniQuote Mobile Application
 

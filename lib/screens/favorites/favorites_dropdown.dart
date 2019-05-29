@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:uniquote/stores/favorites_store.dart';
-import 'package:uniquote/models/user_dropdown.dart';
-import 'package:uniquote/models/tag_model.dart';
+import 'package:uniquote_flutter/stores/favorites_store.dart';
+import 'package:uniquote_flutter/models/user_dropdown.dart';
+import 'package:uniquote_flutter/models/tag_model.dart';
 
 class FavoritesDropdown extends StatelessWidget {
   final FavoritesStore favoritesStore;

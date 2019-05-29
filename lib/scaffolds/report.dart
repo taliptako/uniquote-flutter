@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/common/common.dart';
-import 'package:uniquote/screens/report/report_screen.dart';
+import 'package:uniquote_flutter/common/common.dart';
+import 'package:uniquote_flutter/screens/report/report_screen.dart';
 
 class Report extends StatelessWidget {
   final String type;

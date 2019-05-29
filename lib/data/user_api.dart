@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:uniquote/config/http.dart';
-import 'package:uniquote/data/storage/db.dart';
-import 'package:uniquote/models/user_store.dart';
-import 'package:uniquote/models/tag_model.dart';
-import 'package:uniquote/models/user_dropdown.dart';
+import 'package:uniquote_flutter/config/http.dart';
+import 'package:uniquote_flutter/data/storage/db.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
+import 'package:uniquote_flutter/models/tag_model.dart';
+import 'package:uniquote_flutter/models/user_dropdown.dart';
 
 class UserApi {
   DB _db = DB();

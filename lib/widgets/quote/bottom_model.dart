@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:share/share.dart';
 
-import 'package:uniquote/scaffolds/report.dart';
-import 'package:uniquote/models/quote_store.dart';
+import 'package:uniquote_flutter/scaffolds/report.dart';
+import 'package:uniquote_flutter/models/quote_store.dart';
 
 class BottomModal extends StatelessWidget {
   BottomModal(this.quote);

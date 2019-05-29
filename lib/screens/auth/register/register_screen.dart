@@ -4,10 +4,10 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:validators/validators.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
-import 'package:uniquote/components/progress.dart';
-import 'package:uniquote/screens/auth/register/register_title.dart';
-import 'package:uniquote/screens/auth/register/register_bottom.dart';
-import 'package:uniquote/controllers/auth_controller.dart';
+import 'package:uniquote_flutter/components/progress.dart';
+import 'package:uniquote_flutter/screens/auth/register/register_title.dart';
+import 'package:uniquote_flutter/screens/auth/register/register_bottom.dart';
+import 'package:uniquote_flutter/controllers/auth_controller.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override

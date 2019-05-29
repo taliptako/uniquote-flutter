@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:uniquote/widgets/bottom_loader.dart';
-import 'package:uniquote/widgets/quote/quote_widget.dart';
-import 'package:uniquote/stores/favorites_store.dart';
+import 'package:uniquote_flutter/widgets/bottom_loader.dart';
+import 'package:uniquote_flutter/widgets/quote/quote_widget.dart';
+import 'package:uniquote_flutter/stores/favorites_store.dart';
 
 class FavoritesQuotes extends StatelessWidget {
   final FavoritesStore favoritesStore;

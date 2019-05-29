@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/config/sl.dart';
-import 'package:uniquote/config/config.dart';
-import 'package:uniquote/components/webview_holder.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/config/config.dart';
+import 'package:uniquote_flutter/components/webview_holder.dart';
 
 class AboutScreen extends StatelessWidget {
   final Config _config = sl<Config>();

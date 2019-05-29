@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/common/common.dart';
-import 'package:uniquote/models/user_store.dart';
-import 'package:uniquote/screens/users/followings_screen.dart';
+import 'package:uniquote_flutter/common/common.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
+import 'package:uniquote_flutter/screens/users/followings_screen.dart';
 
 class Followings extends StatelessWidget {
   final UserStore user;

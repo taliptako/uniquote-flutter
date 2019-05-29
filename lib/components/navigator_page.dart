@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/config/route_generator.dart';
+import 'package:uniquote_flutter/config/route_generator.dart';
 
 class NavigatorPage extends StatefulWidget {
   final String route;

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:uniquote/config/http.dart';
+import 'package:uniquote_flutter/config/http.dart';
 import 'package:dio/dio.dart';
 
-import 'package:uniquote/models/user_store.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
 
 class AuthApi {
   Future socialLogin(String idToken) async {

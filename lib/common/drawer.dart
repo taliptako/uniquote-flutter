@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:uniquote/config/sl.dart';
-import 'package:uniquote/config/config.dart';
-import 'package:uniquote/stores/root_store.dart';
-import 'package:uniquote/controllers/auth_controller.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/config/config.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
+import 'package:uniquote_flutter/controllers/auth_controller.dart';
 
 class DrawerWidget extends StatelessWidget {
   final RootStore _rootStore = sl.get<RootStore>();

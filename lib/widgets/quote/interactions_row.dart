@@ -5,7 +5,7 @@ import 'package:pimp_my_button/pimp_my_button.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
-import 'package:uniquote/models/quote_store.dart';
+import 'package:uniquote_flutter/models/quote_store.dart';
 
 class InteractionRow extends StatefulWidget {
   InteractionRow(this.quote);

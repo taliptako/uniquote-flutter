@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
-import 'package:uniquote/data/quote_api.dart';
-import 'package:uniquote/models/quote_store.dart';
+import 'package:uniquote_flutter/data/quote_api.dart';
+import 'package:uniquote_flutter/models/quote_store.dart';
 
 part 'most_liked_store.g.dart';
 

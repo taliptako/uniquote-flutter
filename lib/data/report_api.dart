@@ -1,4 +1,4 @@
-import 'package:uniquote/config/http.dart';
+import 'package:uniquote_flutter/config/http.dart';
 
 class ReportApi {
   Future<bool> reportQuote(int quoteId, int reportType, String description) async {

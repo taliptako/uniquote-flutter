@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
-import 'package:uniquote/models/profession_model.dart';
-import 'package:uniquote/data/user_api.dart';
+import 'package:uniquote_flutter/models/profession_model.dart';
+import 'package:uniquote_flutter/data/user_api.dart';
 
 // Include generated file
 part 'user_store.g.dart';

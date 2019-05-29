@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/models/user_store.dart';
-import 'package:uniquote/common/common.dart';
-import 'package:uniquote/screens/profile/profile_screen.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
+import 'package:uniquote_flutter/common/common.dart';
+import 'package:uniquote_flutter/screens/profile/profile_screen.dart';
 
 class Profile extends StatelessWidget {
   final UserStore user;

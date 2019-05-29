@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:uniquote/components/navigator_page.dart';
-import 'package:uniquote/config/sl.dart';
-import 'package:uniquote/stores/root_store.dart';
+import 'package:uniquote_flutter/components/navigator_page.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
 
 class Tabs extends StatelessWidget {
   final RootStore _rootStore = sl<RootStore>();

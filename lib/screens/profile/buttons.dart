@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:uniquote/components/webview_holder.dart';
-import 'package:uniquote/models/user_store.dart';
-import 'package:uniquote/config/sl.dart';
-import 'package:uniquote/stores/root_store.dart';
+import 'package:uniquote_flutter/components/webview_holder.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
 
 class Buttons extends StatelessWidget {
   final UserStore user;

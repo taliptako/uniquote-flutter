@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:validators/validators.dart';
 
-import 'package:uniquote/screens/auth/title.dart';
-import 'package:uniquote/screens/auth/social_buttons.dart';
-import 'package:uniquote/screens/auth/bottom_text.dart';
-import 'package:uniquote/components/progress.dart';
-import 'package:uniquote/controllers/auth_controller.dart';
+import 'package:uniquote_flutter/screens/auth/title.dart';
+import 'package:uniquote_flutter/screens/auth/social_buttons.dart';
+import 'package:uniquote_flutter/screens/auth/bottom_text.dart';
+import 'package:uniquote_flutter/components/progress.dart';
+import 'package:uniquote_flutter/controllers/auth_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:uniquote/stores/favorites_store.dart';
-import 'package:uniquote/screens/favorites/favorites_quotes.dart';
-import 'package:uniquote/screens/favorites/favorites_dropdown.dart';
+import 'package:uniquote_flutter/stores/favorites_store.dart';
+import 'package:uniquote_flutter/screens/favorites/favorites_quotes.dart';
+import 'package:uniquote_flutter/screens/favorites/favorites_dropdown.dart';
 
 class FavoritesScreen extends StatefulWidget {
   @override

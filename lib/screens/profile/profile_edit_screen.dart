@@ -4,11 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
-import 'package:uniquote/config/sl.dart';
-import 'package:uniquote/stores/root_store.dart';
-import 'package:uniquote/models/user_store.dart';
-import 'package:uniquote/config/config.dart';
-import 'package:uniquote/data/user_api.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
+import 'package:uniquote_flutter/models/user_store.dart';
+import 'package:uniquote_flutter/config/config.dart';
+import 'package:uniquote_flutter/data/user_api.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   @override

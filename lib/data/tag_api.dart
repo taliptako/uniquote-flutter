@@ -1,6 +1,6 @@
-import 'package:uniquote/config/http.dart';
-import 'package:uniquote/data/storage/db.dart';
-import 'package:uniquote/models/tag_model.dart';
+import 'package:uniquote_flutter/config/http.dart';
+import 'package:uniquote_flutter/data/storage/db.dart';
+import 'package:uniquote_flutter/models/tag_model.dart';
 
 class TagApi {
   DB _db = DB();

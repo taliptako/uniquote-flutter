@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 
-import 'package:uniquote/screens/auth/auth_check.dart';
-import 'package:uniquote/config/route_generator.dart';
+import 'package:uniquote_flutter/screens/auth/auth_check.dart';
+import 'package:uniquote_flutter/config/route_generator.dart';
 
 class MyApp extends StatelessWidget {
   final FirebaseAnalytics analytics = FirebaseAnalytics();

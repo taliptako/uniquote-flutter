@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/common/common.dart';
-import 'package:uniquote/screens/users/official_users.dart';
-import 'package:uniquote/screens/users/normal_users.dart';
+import 'package:uniquote_flutter/common/common.dart';
+import 'package:uniquote_flutter/screens/users/official_users.dart';
+import 'package:uniquote_flutter/screens/users/normal_users.dart';
 
 class Users extends StatelessWidget {
   @override

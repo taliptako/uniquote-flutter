@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:edge_alert/edge_alert.dart';
 
-import 'package:uniquote/stores/root_store.dart';
-import 'package:uniquote/config/sl.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
+import 'package:uniquote_flutter/config/sl.dart';
 
 class ErrorNotifier {
   final RootStore _rootStore = sl<RootStore>();

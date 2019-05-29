@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:uniquote/controllers/auth_controller.dart';
+import 'package:uniquote_flutter/controllers/auth_controller.dart';
 
 class AuthCheck extends StatefulWidget {
   @override
