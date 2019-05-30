@@ -59,7 +59,6 @@ abstract class _FavoritesStore with Store {
   refresh() async {
     final result =
         await _quoteApi.fetchUserFavorites(1, userId: userId, tagId: tagId);
-    print(result);
     if (result is List<QuoteStore>) {
       quotes.clear();
       quotes.addAll(result);

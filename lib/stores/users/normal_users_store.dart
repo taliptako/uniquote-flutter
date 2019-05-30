@@ -21,7 +21,7 @@ abstract class _NormalUsersStore with Store {
 
   @action
   refresh() async {
-    final result = await _userApi.fetchNormalUsers(1);
+    final result = await _userApi.fetchNormalUsers(1, clear: true);
     if (result is List<UserStore>) {
       users.clear();
       users.addAll(result);

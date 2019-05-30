@@ -2,6 +2,8 @@ import 'package:mobx/mobx.dart';
 
 import 'package:uniquote_flutter/models/profession_model.dart';
 import 'package:uniquote_flutter/data/user_api.dart';
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
 
 // Include generated file
 part 'user_store.g.dart';
@@ -12,6 +14,7 @@ class UserStore = AbstractUserStore with _$UserStore;
 // The store-class
 abstract class AbstractUserStore with Store {
   final UserApi _userApi = UserApi();
+  final RootStore _rootStore = sl<RootStore>();
 
   final int id;
   final String name;
@@ -67,8 +70,11 @@ abstract class AbstractUserStore with Store {
   follow() async {
     isFollowed = true;
     final bool result = await _userApi.followUser(id);
-
+    followerCount++;
+    _rootStore.user.followingCount++;
     if (!result) {
+      followerCount--;
+      _rootStore.user.followingCount--;
       isFollowed = false;
     }
   }
@@ -77,9 +83,13 @@ abstract class AbstractUserStore with Store {
   unFollow() async {
     isFollowed = false;
     final bool result = await _userApi.unFollowUser(id);
+    followerCount--;
+    _rootStore.user.followingCount--;
 
     if (!result) {
       isFollowed = true;
+      followerCount++;
+      _rootStore.user.followingCount++;
     }
   }
 

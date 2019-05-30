@@ -45,13 +45,13 @@ class DB {
     await kvp.deleteByKey(key + "date");
   }
 
-  Future removeByPrefix(String table, String prefix) async {
+  Future<void> removeByPrefix(String table, String prefix) async {
     final kvp = await kvpDb(table);
     await kvp.bulkDeleteKeysStartWith(prefix);
   }
 
 
-  Future truncateTable(String table) async {
+  Future<void> truncateTable(String table) async {
     final kvp = await kvpDb(table);
     await kvp.truncate();
   }

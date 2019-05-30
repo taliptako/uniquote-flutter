@@ -57,7 +57,7 @@ class UserApi {
   Future<bool> followUser(int userId) async {
     final r = await dio.put('user/$userId/follow');
     if (r.statusCode == 200) {
-      _db.truncateTable(table);
+      await _db.truncateTable(table);
       return true;
     }
     return false;
@@ -66,7 +66,7 @@ class UserApi {
   Future<bool> unFollowUser(int userId) async {
     final r = await dio.put('user/$userId/unfollow');
     if (r.statusCode == 200) {
-      _db.truncateTable(table);
+      await _db.truncateTable(table);
       return true;
     }
     return false;

@@ -21,7 +21,7 @@ abstract class _TagRecentStore with Store {
 
   @action
   refresh(int id) async {
-    final result = await _quoteApi.fetchTagRecent(id, 1);
+    final result = await _quoteApi.fetchTagRecent(id, 1, clear: true);
     if (result is List<QuoteStore>) {
       quotes.clear();
       quotes.addAll(result);

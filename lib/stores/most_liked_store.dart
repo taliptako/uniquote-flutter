@@ -21,7 +21,7 @@ abstract class _MostLikedStore with Store {
 
   @action
   refresh() async {
-    final result = await _quoteApi.fetchMostLiked(1);
+    final result = await _quoteApi.fetchMostLiked(1, clear: true);
     if (result is List<QuoteStore>) {
       quotes.clear();
       quotes.addAll(result);
