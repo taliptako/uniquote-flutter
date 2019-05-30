@@ -10,7 +10,9 @@ class UserApi {
   DB _db = DB();
   static const String table = "users";
 
-  Future<List<UserStore>> fetchOfficialUsers(int page) async {
+  Future<List<UserStore>> fetchOfficialUsers(int page, {clear = false}) async {
+    await clearPrefix(clear, 'official');
+
     var body = await _db.get(table, 'official$page');
 
     if (body == false) {
@@ -26,7 +28,9 @@ class UserApi {
         .toList();
   }
 
-  Future<List<UserStore>> fetchNormalUsers(int page) async {
+  Future<List<UserStore>> fetchNormalUsers(int page, {clear = false}) async {
+    await clearPrefix(clear, 'normal');
+
     var body = await _db.get(table, 'normal$page');
 
     if (body == false) {
@@ -53,6 +57,7 @@ class UserApi {
   Future<bool> followUser(int userId) async {
     final r = await dio.put('user/$userId/follow');
     if (r.statusCode == 200) {
+      _db.truncateTable(table);
       return true;
     }
     return false;
@@ -61,6 +66,7 @@ class UserApi {
   Future<bool> unFollowUser(int userId) async {
     final r = await dio.put('user/$userId/unfollow');
     if (r.statusCode == 200) {
+      _db.truncateTable(table);
       return true;
     }
     return false;
@@ -131,7 +137,11 @@ class UserApi {
     }
 
     final r = await dio.post('profile', data: data);
+  }
 
-    print(r);
+  Future<void> clearPrefix(bool clear, String prefix) async {
+    if (clear) {
+      await _db.removeByPrefix(table, prefix);
+    }
   }
 }

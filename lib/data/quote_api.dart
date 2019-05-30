@@ -6,7 +6,9 @@ class QuoteApi {
   DB _db = DB();
   static const String table = "quotes";
 
-  Future<List<QuoteStore>> fetchFeed(int page) async {
+  Future<List<QuoteStore>> fetchFeed(int page, {clear = false}) async {
+    await clearPrefix(clear, 'feed');
+
     var body = await _db.get(table, 'feed$page');
 
     if (body == false) {
@@ -22,7 +24,9 @@ class QuoteApi {
         .toList();
   }
 
-  Future<List<QuoteStore>> fetchMostLiked(int page) async {
+  Future<List<QuoteStore>> fetchMostLiked(int page, {clear = false}) async {
+    await clearPrefix(clear, 'most_liked');
+
     var body = await _db.get(table, 'most_liked$page');
 
     if (body == false) {
@@ -38,7 +42,9 @@ class QuoteApi {
         .toList();
   }
 
-  Future<List<QuoteStore>> fetchTagRecent(int id, int page) async {
+  Future<List<QuoteStore>> fetchTagRecent(int id, int page, {clear = false}) async {
+    await clearPrefix(clear, '${id}_recent');
+
     var body = await _db.get(table, '${id}_recent$page');
 
     if (body == false) {
@@ -54,7 +60,9 @@ class QuoteApi {
         .toList();
   }
 
-  Future<List<QuoteStore>> fetchTagMostLiked(int id, int page) async {
+  Future<List<QuoteStore>> fetchTagMostLiked(int id, int page, {clear = false}) async {
+    await clearPrefix(clear, '${id}_most_liked');
+
     var body = await _db.get(table, '${id}_most_liked$page');
 
     if (body == false) {
@@ -80,7 +88,6 @@ class QuoteApi {
       data.addAll({'tag_id': tagId});
     }
 
-    print(data);
     final r = await dio.get('user_favorites', queryParameters: data);
 
     final json = _db.decode(r.data);
@@ -113,6 +120,12 @@ class QuoteApi {
       return true;
     } catch (e) {
       return false;
+    }
+  }
+
+  Future<void> clearPrefix(bool clear, String prefix) async {
+    if (clear) {
+      await _db.removeByPrefix(table, prefix);
     }
   }
 }

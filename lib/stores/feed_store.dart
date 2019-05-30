@@ -21,7 +21,7 @@ abstract class _FeedStore with Store {
 
   @action
   refresh() async {
-    final result = await _quoteApi.fetchFeed(1);
+    final result = await _quoteApi.fetchFeed(1, clear: true);
     if (result is List<QuoteStore>) {
       quotes.clear();
       quotes.addAll(result);

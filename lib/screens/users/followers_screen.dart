@@ -42,7 +42,7 @@ class _FollowersScreenState extends State<FollowersScreen> {
     return Observer(builder: (_) {
       if (_followersStore.page == 1 && _followersStore.hasReachedEnd) {
         return Center(
-          child: Text('No User'),
+          child: Text('No Followers'),
         );
       } else if (!_followersStore.hasReachedEnd &&
           _followersStore.users.isEmpty) {

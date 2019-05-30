@@ -17,87 +17,108 @@ class DrawerWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          drawerHeader(),
+          drawerHeader(context),
           Menu(),
         ],
       ),
     );
   }
 
-  Container drawerHeader() {
+  Container drawerHeader(BuildContext context) {
     return Container(
       height: 300,
       child: DrawerHeader(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[avatar(), stats()],
+          children: <Widget>[avatar(context), stats(context)],
         ),
       ),
     );
   }
 
-  Row avatar() {
+  Row avatar(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Column(
-          children: <Widget>[
-            _rootStore.user.avatarLg == null
-                ? CircleAvatar(
-                    radius: 45,
-                    child: Text('${_rootStore.user.name[0]}',
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.w600)),
-                  )
-                : CircleAvatar(
-                    radius: 45,
-                    backgroundImage: NetworkImage(
-                        "${_config.storageUrl + _rootStore.user.avatarLg}"),
-                  ),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: Text("${_rootStore.user.name}",
-                  style: TextStyle(
-                    fontSize: 20,
-                  )),
-            )
-          ],
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '3');
+          },
+          child: Column(
+            children: <Widget>[
+              _rootStore.user.avatarLg == null
+                  ? CircleAvatar(
+                      radius: 45,
+                      child: Text('${_rootStore.user.name[0]}',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.w600)),
+                    )
+                  : CircleAvatar(
+                      radius: 45,
+                      backgroundImage: NetworkImage(
+                          "${_config.storageUrl + _rootStore.user.avatarLg}"),
+                    ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Text("${_rootStore.user.name}",
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
+              )
+            ],
+          ),
         )
       ],
     );
   }
 
-  Observer stats() {
+  Observer stats(BuildContext context) {
     return Observer(builder: (_) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              Text(
-                "${_rootStore.user.favoriteCount}",
-                style: TextStyle(fontSize: 28),
-              ),
-              Text('favorites')
-            ],
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/favorites');
+            },
+            child: Column(
+              children: <Widget>[
+                Text(
+                  "${_rootStore.user.favoriteCount}",
+                  style: TextStyle(fontSize: 28),
+                ),
+                Text('favorites')
+              ],
+            ),
           ),
-          Column(
-            children: <Widget>[
-              Text(
-                "${_rootStore.user.quoteCount}",
-                style: TextStyle(fontSize: 28),
-              ),
-              Text('quotes')
-            ],
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '3');
+            },
+            child: Column(
+              children: <Widget>[
+                Text(
+                  "${_rootStore.user.quoteCount}",
+                  style: TextStyle(fontSize: 28),
+                ),
+                Text('quotes')
+              ],
+            ),
           ),
-          Column(
-            children: <Widget>[
-              Text(
-                "${_rootStore.user.followerCount}",
-                style: TextStyle(fontSize: 28),
-              ),
-              Text('follower')
-            ],
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/followers',
+                  arguments: _rootStore.user);
+            },
+            child: Column(
+              children: <Widget>[
+                Text(
+                  "${_rootStore.user.followerCount}",
+                  style: TextStyle(fontSize: 28),
+                ),
+                Text('follower')
+              ],
+            ),
           ),
         ],
       );
