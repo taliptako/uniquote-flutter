@@ -15,6 +15,7 @@ dependencies:
   mobx: ^0.2.0
   flutter_mobx: ^0.2.0+1
 
+  timeago: ^2.0.16
   validators: ^2.0.0+1
   frideos_kvprx: ^0.3.0+1
   flutter_secure_storage: ^3.2.1+1

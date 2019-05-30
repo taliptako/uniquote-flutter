@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_advanced_networkimage/provider.dart';
 
+import 'package:uniquote_flutter/config/sl.dart';
+import 'package:uniquote_flutter/config/config.dart';
+import 'package:uniquote_flutter/stores/root_store.dart';
 import 'package:uniquote_flutter/screens/quote_detail_screen.dart';
 import 'package:uniquote_flutter/models/quote_store.dart';
 
@@ -25,14 +28,7 @@ class QuoteDetail extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(10, 7, 0, 7),
                 child: Row(
                   children: <Widget>[
-                    CircleAvatar(
-                      radius: 22,
-                        backgroundImage: AdvancedNetworkImage(
-                      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Tesla3.jpg/200px-Tesla3.jpg",
-                      retryLimit: 1,
-                      useDiskCache: true,
-                      cacheRule: CacheRule(maxAge: const Duration(days: 7)),
-                    )),
+                    _avatar(),
                     Container(
                       margin: EdgeInsets.only(left: 15),
                       width: MediaQuery.of(context).size.width / 1.6,
@@ -40,14 +36,13 @@ class QuoteDetail extends StatelessWidget {
                         minLines: 1,
                         maxLines: 5,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(12),
-                          hintText: "Add a comment...",
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(50))
-                          )
-                        ),
+                            contentPadding: EdgeInsets.all(12),
+                            hintText: "Add a comment...",
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50)))),
                       ),
                     ),
                     Container(
@@ -64,5 +59,25 @@ class QuoteDetail extends StatelessWidget {
           )),
       body: QuoteDetailScreen(quote: quote),
     );
+  }
+
+  CircleAvatar _avatar() {
+    if (sl<RootStore>().user.avatarSm == null) {
+      return CircleAvatar(
+        radius: 22,
+        child: Text(sl<RootStore>().user.name[0],
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600)),
+      );
+    } else {
+      return CircleAvatar(
+        radius: 22,
+        backgroundImage: AdvancedNetworkImage(
+          sl<Config>().storageUrl + sl<RootStore>().user.avatarSm,
+          retryLimit: 1,
+          useDiskCache: true,
+          cacheRule: CacheRule(maxAge: const Duration(days: 7)),
+        ),
+      );
+    }
   }
 }

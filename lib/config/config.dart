@@ -11,7 +11,7 @@ class Config {
 
   void prod() {
     apiUrl = "https://uniquote.net/api/";
-    storageUrl = "https://data.storage.googleapis.com/uniquote_main/";
-    privacyUrl = "http://uniquote-api.flatpaks.com/privacy_policy.html";
+    storageUrl = "https://storage.googleapis.com/uniquote/";
+    privacyUrl = "https://uniquote-api.flatpaks.com/privacy_policy.html";
   }
 }

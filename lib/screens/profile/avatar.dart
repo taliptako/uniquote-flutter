@@ -19,7 +19,7 @@ class Avatar extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 3.7,
           height: 120,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.elliptical(40, 40)),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
             image: DecorationImage(
               fit: BoxFit.fitWidth,
               image: AdvancedNetworkImage(
@@ -36,7 +36,7 @@ class Avatar extends StatelessWidget {
         height: 120,
         decoration: BoxDecoration(
           color: Colors.deepPurple,
-          borderRadius: BorderRadius.all(Radius.elliptical(40, 40)),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: Center(
             child: Text(
