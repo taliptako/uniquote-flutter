@@ -10,7 +10,7 @@ import 'package:uniquote_flutter/config/config.dart';
 import 'package:uniquote_flutter/app.dart';
 
 void main() {
-  if (kReleaseMode && 1 == 2) {
+  if (kReleaseMode) {
     final config = Config();
     config.prod();
     sl.registerSingleton<Config>(config);
