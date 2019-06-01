@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
+import 'package:uniquote_flutter/components/progress.dart';
+import 'package:uniquote_flutter/components/dialoger.dart';
 import 'package:uniquote_flutter/config/sl.dart';
 import 'package:uniquote_flutter/stores/root_store.dart';
 import 'package:uniquote_flutter/models/user_store.dart';
@@ -40,12 +42,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         child: Form(
           key: _editForm,
           child: ListView(
-            children: <Widget>[buildAvatar(), buildFields()],
+            children: <Widget>[buildAvatar(), buildFields(context)],
           ),
         ));
   }
 
-  buildFields() {
+  buildFields(BuildContext context) {
     return Column(
       children: <Widget>[
         TextFormField(
@@ -92,9 +94,19 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             color: Colors.deepPurple,
             onPressed: () async {
               _editForm.currentState.save();
-
-              await _userApi.updateProfile(
+              Progress.show(context);
+              final result = await _userApi.updateProfile(
                   avatar: _image, bio: bio, birthDay: date);
+              Progress.hide(context);
+              if (result is UserStore) {
+                _rootStore.changeUser(result);
+                Dialoger(context).added(
+                    'Success', 'Your profile has been updated successfully.');
+                Navigator.pushNamed(context, '3');
+              } else {
+                Dialoger(context)
+                    .redAlert('Error', 'Error occurred during update');
+              }
             },
             child: Text(
               'Submit',

@@ -79,7 +79,7 @@ class AuthController {
 
     if (user is FirebaseUser) {
       final sUser = await getUserFromStorage();
-      if (sUser is UserStore) {
+      if (sUser is UserStore && sUser.email == user.email) {
         return await loginProcess(sUser, clear: false);
       } else {
         final result = await _authApi.socialLogin(await user.getIdToken());
@@ -101,20 +101,6 @@ class AuthController {
     }
     final UserStore user = AbstractUserStore.fromJson(jsonDecode(data));
     return user;
-  }
-
-  Future checkLocal(FirebaseUser fUser) async {
-    final sUser = await getUserFromStorage();
-    if (sUser is UserStore) {
-      if (fUser.email == sUser.email) {
-        sUser.apiToken = null;
-        return sUser;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
   }
 
   Future<bool> logout() async {

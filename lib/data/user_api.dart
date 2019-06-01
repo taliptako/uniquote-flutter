@@ -119,24 +119,27 @@ class UserApi {
 
     final json = _db.decode(r.data);
 
-    return json['data']
-        .map<Tag>((json) => Tag.fromJson(json))
-        .toList();
+    return json['data'].map<Tag>((json) => Tag.fromJson(json)).toList();
   }
 
-  Future updateProfile({DateTime birthDay, String bio, avatar}) async {
+  Future<UserStore> updateProfile(
+      {DateTime birthDay, String bio, avatar}) async {
     Map data = {};
     if (birthDay != null) {
-      data.addAll({'born': birthDay});
+      data.addAll({'born': "$birthDay"});
     }
-    if (bio != null) {
+    if (bio != null && bio != "") {
       data.addAll({'bio': bio});
     }
     if (avatar != null) {
-      avatar = base64Encode(avatar.readAsBytesSync());
+      data.addAll({'avatar_64': base64Encode(avatar.readAsBytesSync())});
     }
 
     final r = await dio.post('profile', data: data);
+
+    final json = _db.decode(r.data);
+
+    return AbstractUserStore.fromJson(json['data']);
   }
 
   Future<void> clearPrefix(bool clear, String prefix) async {

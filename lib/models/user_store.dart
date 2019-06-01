@@ -71,10 +71,10 @@ abstract class AbstractUserStore with Store {
     isFollowed = true;
     final bool result = await _userApi.followUser(id);
     followerCount++;
-    _rootStore.user.followingCount++;
+    await _rootStore.incFollowing();
     if (!result) {
       followerCount--;
-      _rootStore.user.followingCount--;
+      await _rootStore.decFollowing();
       isFollowed = false;
     }
   }
@@ -84,12 +84,12 @@ abstract class AbstractUserStore with Store {
     isFollowed = false;
     final bool result = await _userApi.unFollowUser(id);
     followerCount--;
-    _rootStore.user.followingCount--;
+    await _rootStore.decFollowing();
 
     if (!result) {
       isFollowed = true;
       followerCount++;
-      _rootStore.user.followingCount++;
+      await _rootStore.incFollowing();
     }
   }
 

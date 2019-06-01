@@ -15,7 +15,6 @@ class CommentApi {
   Future<bool> storeComment(int id, String comment) async {
     final r = await dio.post('quote/$id/comment', data: {'comment': comment});
 
-    final json = jsonDecode(r.data);
     if (r.statusCode == 201) {
       return true;
     }

@@ -55,6 +55,27 @@ mixin _$RootStore on _RootStore, Store {
     _$errorAtom.reportChanged();
   }
 
+  final _$changeUserAsyncAction = AsyncAction('changeUser');
+
+  @override
+  Future changeUser(UserStore nUser) {
+    return _$changeUserAsyncAction.run(() => super.changeUser(nUser));
+  }
+
+  final _$incFollowingAsyncAction = AsyncAction('incFollowing');
+
+  @override
+  Future incFollowing() {
+    return _$incFollowingAsyncAction.run(() => super.incFollowing());
+  }
+
+  final _$decFollowingAsyncAction = AsyncAction('decFollowing');
+
+  @override
+  Future decFollowing() {
+    return _$decFollowingAsyncAction.run(() => super.decFollowing());
+  }
+
   final _$_RootStoreActionController = ActionController(name: '_RootStore');
 
   @override
