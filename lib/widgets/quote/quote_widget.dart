@@ -5,8 +5,9 @@ import 'package:uniquote_flutter/models/quote_store.dart';
 import 'package:uniquote_flutter/widgets/quote/interactions_row.dart';
 
 class QuoteWidget extends StatelessWidget {
-  QuoteWidget(this.quote);
+  QuoteWidget(this.quote, {this.current});
 
+  final bool current;
   final QuoteStore quote;
 
   @override
@@ -37,7 +38,9 @@ class QuoteWidget extends StatelessWidget {
   GestureDetector _textRow(context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/quote_detail', arguments: quote);
+        if (current == null) {
+          Navigator.pushNamed(context, '/quote_detail', arguments: quote);
+        }
       },
       child: Row(
         children: <Widget>[

@@ -29,7 +29,11 @@ class _QuoteDetailScreenState extends State<QuoteDetailScreen> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        SliverToBoxAdapter(child: QuoteWidget(widget.quote)),
+        SliverToBoxAdapter(
+            child: QuoteWidget(
+          widget.quote,
+          current: true,
+        )),
         SliverToBoxAdapter(
             child: Container(
           padding: EdgeInsets.all(10),
