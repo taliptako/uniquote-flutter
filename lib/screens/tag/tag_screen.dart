@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import 'package:uniquote_flutter/components/error_notifier.dart';
 import 'package:uniquote_flutter/stores/tag/tag_store.dart';
 import 'package:uniquote_flutter/widgets/tag_widget.dart';
 
@@ -17,6 +18,8 @@ class _TagScreenState extends State<TagScreen> {
   void initState() {
     _tagStore.fetchFollowed();
     _tagStore.fetchUnFollowed();
+
+    ErrorNotifier(context).invoke();
 
     super.initState();
   }

@@ -72,7 +72,7 @@ abstract class AbstractUserStore with Store {
     final bool result = await _userApi.followUser(id);
     followerCount++;
     await _rootStore.incFollowing();
-    if (!result) {
+    if (!result || result == null) {
       followerCount--;
       await _rootStore.decFollowing();
       isFollowed = false;

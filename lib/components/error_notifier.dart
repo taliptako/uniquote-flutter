@@ -29,6 +29,7 @@ class ErrorNotifier {
   }
 
   void tooMany() {
+    print('tooMany');
     EdgeAlert.show(context,
         icon: Icons.report_problem,
         duration: 3,

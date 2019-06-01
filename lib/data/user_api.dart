@@ -55,21 +55,23 @@ class UserApi {
   }
 
   Future<bool> followUser(int userId) async {
-    final r = await dio.put('user/$userId/follow');
-    if (r.statusCode == 200) {
+    try {
+      await dio.put('user/$userId/follow');
       await _db.truncateTable(table);
       return true;
+    } catch (e) {
+      return false;
     }
-    return false;
   }
 
   Future<bool> unFollowUser(int userId) async {
-    final r = await dio.put('user/$userId/unfollow');
-    if (r.statusCode == 200) {
+    try {
+      await dio.put('user/$userId/unfollow');
       await _db.truncateTable(table);
       return true;
+    } catch (e) {
+      return false;
     }
-    return false;
   }
 
   Future<List<UserStore>> fetchUserFollowings(int id, int page) async {

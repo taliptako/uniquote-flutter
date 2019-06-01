@@ -51,33 +51,29 @@ class _OfficialUsersState extends State<OfficialUsers>
         );
       }
 
-      if (_officialUsersStore.users.isEmpty) {
-        return Center(child: CircularProgressIndicator());
-      } else {
-        return LiquidPullToRefresh(
-          showChildOpacityTransition: false,
-          scrollController: _scrollController,
-          onRefresh: () async {
-            await _officialUsersStore.refresh();
+      return LiquidPullToRefresh(
+        showChildOpacityTransition: false,
+        scrollController: _scrollController,
+        onRefresh: () async {
+          await _officialUsersStore.refresh();
+        },
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: _officialUsersStore.users.length,
+          itemBuilder: (context, index) {
+            return index + 1 >= _officialUsersStore.users.length &&
+                    !_officialUsersStore.hasReachedEnd &&
+                    _officialUsersStore.users.length > 5
+                ? Column(
+                    children: <Widget>[
+                      UserWidget(user: _officialUsersStore.users[index]),
+                      BottomLoader()
+                    ],
+                  )
+                : UserWidget(user: _officialUsersStore.users[index]);
           },
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: _officialUsersStore.users.length,
-            itemBuilder: (context, index) {
-              return index + 1 >= _officialUsersStore.users.length &&
-                      !_officialUsersStore.hasReachedEnd &&
-                      _officialUsersStore.users.length > 5
-                  ? Column(
-                      children: <Widget>[
-                        UserWidget(user: _officialUsersStore.users[index]),
-                        BottomLoader()
-                      ],
-                    )
-                  : UserWidget(user: _officialUsersStore.users[index]);
-            },
-          ),
-        );
-      }
+        ),
+      );
     });
   }
 }
