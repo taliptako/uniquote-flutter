@@ -13,11 +13,11 @@ class CommentApi {
   }
 
   Future<bool> storeComment(int id, String comment) async {
-    final r = await dio.post('quote/$id/comment', data: {'comment': comment});
-
-    if (r.statusCode == 201) {
+    try {
+      await dio.post('quote/$id/comment', data: {'comment': comment});
       return true;
+    } catch (e) {
+      return false;
     }
-    return false;
   }
 }

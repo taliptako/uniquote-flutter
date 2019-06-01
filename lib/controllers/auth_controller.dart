@@ -91,7 +91,7 @@ class AuthController {
   }
 
   Future<void> storeUserToStorage(UserStore user) async {
-    await _storage.write(key: "user", value: jsonEncode(user));
+    await _storage.write(key: "user", value: jsonEncode(user.toJson()));
   }
 
   Future getUserFromStorage() async {

@@ -138,7 +138,7 @@ abstract class AbstractUserStore with Store {
         'religion': religion,
         'bio': bio,
         'bio_url': bioUrl,
-        'born': born,
+        'born': born.toString(),
         'avatar_lg': avatarLg,
         'avatar_sm': avatarSm,
         'password': password,
