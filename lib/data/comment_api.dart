@@ -12,11 +12,13 @@ class CommentApi {
     return json['data'].map<Comment>((json) => Comment.fromJson(json)).toList();
   }
 
-  Future<Comment> storeComment(int id, String comment) async {
+  Future<bool> storeComment(int id, String comment) async {
     final r = await dio.post('quote/$id/comment', data: {'comment': comment});
 
     final json = jsonDecode(r.data);
-
-    return Comment.fromJson(json);
+    if (r.statusCode == 201) {
+      return true;
+    }
+    return false;
   }
 }

@@ -11,6 +11,14 @@ class DB {
     return kvpDb;
   }
 
+  Future<void> deleteDB() async {
+    final dbProvider = DbProvider();
+    await dbProvider.init();
+    await dbProvider.truncate('quotes');
+    await dbProvider.truncate('users');
+    await dbProvider.truncate('tags');
+  }
+
   Future get(String table, String key) async {
     final kvp = await kvpDb(table);
     final kv = await kvp.getByKey(key);

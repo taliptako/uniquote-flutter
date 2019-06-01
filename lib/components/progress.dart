@@ -13,6 +13,6 @@ class Progress {
   }
 
   static void hide(BuildContext context) {
-    Navigator.pop(context);
+    Navigator.of(context, rootNavigator: true).pop();
   }
 }

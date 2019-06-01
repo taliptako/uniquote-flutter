@@ -10,8 +10,10 @@ import 'package:uniquote_flutter/config/sl.dart';
 import 'package:uniquote_flutter/stores/root_store.dart';
 import 'package:uniquote_flutter/models/user_store.dart';
 import 'package:uniquote_flutter/data/auth_api.dart';
+import 'package:uniquote_flutter/data/storage/db.dart';
 
 class AuthController {
+  final DB _db = DB();
   final _storage = FlutterSecureStorage();
   final RootStore _rootStore = sl<RootStore>();
   final FirebaseController _firebaseController = FirebaseController();
@@ -42,7 +44,10 @@ class AuthController {
     return await loginProcess(result);
   }
 
-  Future<bool> loginProcess(result) async {
+  Future<bool> loginProcess(result, {clear = true}) async {
+    if(clear) {
+      await _db.deleteDB();
+    }
     if (result is UserStore) {
       _rootStore.user = result;
       await storeUserToStorage(result);
@@ -75,7 +80,7 @@ class AuthController {
     if (user is FirebaseUser) {
       final sUser = await getUserFromStorage();
       if (sUser is UserStore) {
-        return await loginProcess(sUser);
+        return await loginProcess(sUser, clear: false);
       } else {
         final result = await _authApi.socialLogin(await user.getIdToken());
         return await loginProcess(result);
