@@ -58,7 +58,7 @@ abstract class _RootStore with Store {
   }
 
   Future<void> saveSUser(UserStore nUser) async {
-    await _storage.write(key: "user", value: jsonEncode(nUser));
+    await _storage.write(key: "user", value: jsonEncode(nUser.toJson()));
   }
 
   @action
