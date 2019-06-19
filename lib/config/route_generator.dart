@@ -5,25 +5,25 @@ import 'package:uniquote_flutter/stores/root_store.dart';
 
 import 'package:uniquote_flutter/components/webview_holder.dart';
 
-import 'package:uniquote_flutter/screens/auth/auth_check.dart';
+import 'package:uniquote_flutter/ui/auth/auth_check.dart';
 
-import 'package:uniquote_flutter/scaffolds/register.dart';
-import 'package:uniquote_flutter/scaffolds/login.dart';
+import 'package:uniquote_flutter/ui/auth/register/register.dart';
+import 'package:uniquote_flutter/ui/auth/login/login.dart';
 
-import 'package:uniquote_flutter/scaffolds/tabs.dart';
-import 'package:uniquote_flutter/scaffolds/home.dart';
-import 'package:uniquote_flutter/scaffolds/tag.dart';
-import 'package:uniquote_flutter/scaffolds/tag_list.dart';
-import 'package:uniquote_flutter/scaffolds/users.dart';
-import 'package:uniquote_flutter/scaffolds/profile.dart';
-import 'package:uniquote_flutter/scaffolds/profile_edit.dart';
-import 'package:uniquote_flutter/scaffolds/quote_detail.dart';
-import 'package:uniquote_flutter/scaffolds/followers.dart';
-import 'package:uniquote_flutter/scaffolds/followings.dart';
+import 'package:uniquote_flutter/ui/tabs/tabs.dart';
+import 'package:uniquote_flutter/ui/home/home.dart';
+import 'package:uniquote_flutter/ui/tag/tag.dart';
+import 'package:uniquote_flutter/ui/tag/tag_list.dart';
+import 'package:uniquote_flutter/ui/users/users.dart';
+import 'package:uniquote_flutter/ui/profile/profile.dart';
+import 'package:uniquote_flutter/ui/profile/profile_edit.dart';
+import 'package:uniquote_flutter/ui/quote_detail/quote_detail.dart';
+import 'package:uniquote_flutter/ui/users/followers.dart';
+import 'package:uniquote_flutter/ui/users/followings.dart';
 
-import 'package:uniquote_flutter/scaffolds/favorites.dart';
-import 'package:uniquote_flutter/scaffolds/about.dart';
-import 'package:uniquote_flutter/scaffolds/report.dart';
+import 'package:uniquote_flutter/ui/favorites/favorites.dart';
+import 'package:uniquote_flutter/ui/about/about.dart';
+import 'package:uniquote_flutter/ui/report/report.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

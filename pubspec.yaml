@@ -12,13 +12,14 @@ dependencies:
 
   dio: ^2.1.6
   get_it: ^1.0.3+1
-  mobx: ^0.2.0
-  flutter_mobx: ^0.2.0+1
+  mobx: ^0.2.1+1
+  flutter_mobx: ^0.2.3+1
 
   timeago: ^2.0.16
   validators: ^2.0.0+1
   frideos_kvprx: ^0.3.0+1
-  flutter_secure_storage: ^3.2.1+1
+  shared_preferences: ^0.5.3+1
+  xxtea: ^2.0.2
 
   #Official Plugins
   sentry: ^2.2.0
@@ -37,7 +38,7 @@ dependencies:
   datetime_picker_formfield: ^0.1.8
 
   liquid_pull_to_refresh: ^1.1.0
-  bottom_navy_bar: ^4.2.0
+  bottom_navy_bar: ^5.1.0
   flutter_tags: ^0.3.1
 
   edge_alert: ^0.0.1
@@ -45,6 +46,7 @@ dependencies:
 
   random_color: ^1.0.3
   gradient_widgets: ^0.4.1
+  like_button: ^0.1.6
 
   pimp_my_button:
     git:
@@ -57,7 +59,7 @@ dev_dependencies:
     sdk: flutter
 
   build_runner: ^1.5.0
-  mobx_codegen: ^0.2.0+1
+  mobx_codegen: ^0.2.1+2
 
   flutter_launcher_icons: ^0.7.2
 

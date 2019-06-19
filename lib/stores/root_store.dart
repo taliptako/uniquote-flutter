@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import 'package:uniquote_flutter/controllers/auth_controller.dart';
 import 'package:uniquote_flutter/models/user_store.dart';
 
 part 'root_store.g.dart';
@@ -11,7 +9,7 @@ part 'root_store.g.dart';
 class RootStore = _RootStore with _$RootStore;
 
 abstract class _RootStore with Store {
-  final _storage = FlutterSecureStorage();
+  final AuthController _authController = AuthController();
 
   @observable
   UserStore user;
@@ -52,13 +50,11 @@ abstract class _RootStore with Store {
   }
 
   Future<UserStore> getSUser() async {
-    final data = await _storage.read(key: 'user');
-    final UserStore sUser = AbstractUserStore.fromJson(jsonDecode(data));
-    return sUser;
+    return await _authController.getUserFromStorage();
   }
 
   Future<void> saveSUser(UserStore nUser) async {
-    await _storage.write(key: "user", value: jsonEncode(nUser.toJson()));
+    await _authController.storeUserToStorage(nUser);
   }
 
   @action

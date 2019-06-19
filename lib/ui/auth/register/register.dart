@@ -5,16 +5,16 @@ import 'package:validators/validators.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
 import 'package:uniquote_flutter/components/progress.dart';
-import 'package:uniquote_flutter/screens/auth/register/register_title.dart';
-import 'package:uniquote_flutter/screens/auth/register/register_bottom.dart';
+import 'package:uniquote_flutter/ui/auth/register/register_title.dart';
+import 'package:uniquote_flutter/ui/auth/register/register_bottom.dart';
 import 'package:uniquote_flutter/controllers/auth_controller.dart';
 
-class RegisterScreen extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterState extends State<Register> {
   AuthController _authController = AuthController();
   final _formKey = new GlobalKey<FormState>();
   var _passKey = GlobalKey<FormFieldState>();

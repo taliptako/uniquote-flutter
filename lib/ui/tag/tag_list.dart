@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:uniquote_flutter/models/tag_model.dart';
 import 'package:uniquote_flutter/common/common.dart';
-import 'package:uniquote_flutter/screens/tag/tag_recent.dart';
-import 'package:uniquote_flutter/screens/tag/tag_mostliked.dart';
+import 'package:uniquote_flutter/ui/tag/tag_recent.dart';
+import 'package:uniquote_flutter/ui/tag/tag_mostliked.dart';
 
 class TagList extends StatelessWidget {
   final Tag tag;

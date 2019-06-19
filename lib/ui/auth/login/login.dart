@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:validators/validators.dart';
 
-import 'package:uniquote_flutter/screens/auth/title.dart';
-import 'package:uniquote_flutter/screens/auth/social_buttons.dart';
-import 'package:uniquote_flutter/screens/auth/bottom_text.dart';
+import 'package:uniquote_flutter/ui/auth/login/bottom_text.dart';
+import 'package:uniquote_flutter/ui/auth/login/social_buttons.dart';
+import 'package:uniquote_flutter/ui/auth/login/title.dart';
 import 'package:uniquote_flutter/components/progress.dart';
 import 'package:uniquote_flutter/controllers/auth_controller.dart';
 
-class LoginScreen extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginState createState() => _LoginState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginState extends State<Login> {
   AuthController _authController = AuthController();
   final _formKey = new GlobalKey<FormState>();
   Color _eyeButtonColor = Colors.grey;
@@ -25,35 +25,37 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: ListView(
-        padding: const EdgeInsets.fromLTRB(22.0, 0.0, 22.0, 22.0),
-        children: <Widget>[
-          SizedBox(height: kToolbarHeight),
-          TitleWidget(),
-          fields(),
-          SizedBox(
-            height: 25.0,
-          ),
-          loginButton(context),
-          SizedBox(
-            height: 20.0,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              'or login with',
-              style: TextStyle(fontSize: 13.0, color: Colors.grey),
+    return Scaffold(
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(22.0, 0.0, 22.0, 22.0),
+          children: <Widget>[
+            SizedBox(height: kToolbarHeight),
+            TitleWidget(),
+            fields(),
+            SizedBox(
+              height: 25.0,
             ),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          SocialButtons(),
-          SizedBox(height: 20.0),
-          BottomText(),
-        ],
+            loginButton(context),
+            SizedBox(
+              height: 20.0,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                'or login with',
+                style: TextStyle(fontSize: 13.0, color: Colors.grey),
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            SocialButtons(),
+            SizedBox(height: 20.0),
+            BottomText(),
+          ],
+        ),
       ),
     );
   }

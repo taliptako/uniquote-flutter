@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:uniquote_flutter/common/common.dart';
-import 'package:uniquote_flutter/screens/favorites/favorites_screen.dart';
+import 'package:uniquote_flutter/ui/favorites/favorites_screen.dart';
 
 class Favorites extends StatelessWidget {
   @override

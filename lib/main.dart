@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
 import 'package:sentry/sentry.dart';
@@ -26,13 +25,13 @@ void main() {
     }
   };
 
-  if (kReleaseMode) {
+  if (isInDebugMode) {
     final config = Config();
-    config.prod();
+    config.debug();
     sl.registerSingleton<Config>(config);
   } else {
     final config = Config();
-    config.debug();
+    config.prod();
     sl.registerSingleton<Config>(config);
   }
 

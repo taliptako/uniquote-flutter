@@ -8,7 +8,7 @@ import 'package:uniquote_flutter/components/dialoger.dart';
 import 'package:uniquote_flutter/components/progress.dart';
 import 'package:uniquote_flutter/data/comment_api.dart';
 import 'package:uniquote_flutter/stores/root_store.dart';
-import 'package:uniquote_flutter/screens/quote_detail_screen.dart';
+import 'package:uniquote_flutter/ui/quote_detail/quote_detail_screen.dart';
 import 'package:uniquote_flutter/models/quote_store.dart';
 
 class QuoteDetail extends StatelessWidget {

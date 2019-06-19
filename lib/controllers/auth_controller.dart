@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:xxtea/xxtea.dart';
 
 import 'package:uniquote_flutter/config/http.dart';
 import 'package:uniquote_flutter/controllers/firebase_controller.dart';
@@ -14,8 +15,6 @@ import 'package:uniquote_flutter/data/storage/db.dart';
 
 class AuthController {
   final DB _db = DB();
-  final _storage = FlutterSecureStorage();
-  final RootStore _rootStore = sl<RootStore>();
   final FirebaseController _firebaseController = FirebaseController();
   final AuthApi _authApi = AuthApi();
 
@@ -45,11 +44,11 @@ class AuthController {
   }
 
   Future<bool> loginProcess(result, {clear = true}) async {
-    if(clear) {
+    if (clear) {
       await _db.deleteDB();
     }
     if (result is UserStore) {
-      _rootStore.user = result;
+      sl<RootStore>().user = result;
       await storeUserToStorage(result);
       dio.options.headers = {'Authorization': 'Bearer ${result.apiToken}'};
       return true;
@@ -91,23 +90,36 @@ class AuthController {
   }
 
   Future<void> storeUserToStorage(UserStore user) async {
-    await _storage.write(key: "user", value: jsonEncode(user.toJson()));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String encUser =
+        xxtea.encryptToString(jsonEncode(user.toJson()), "uhwesjkbsjkdasf");
+
+    await prefs.setString('sUser', encUser);
   }
 
   Future getUserFromStorage() async {
-    final data = await _storage.read(key: 'user');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final data = prefs.get('sUser');
     if (data == null) {
       return false;
     }
-    final UserStore user = AbstractUserStore.fromJson(jsonDecode(data));
+    String decUser = xxtea.decryptToString(data, "uhwesjkbsjkdasf");
+
+    final UserStore user = AbstractUserStore.fromJson(jsonDecode(decUser));
     return user;
+  }
+
+  Future<bool> deleteUserFromStorage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.remove('sUser');
   }
 
   Future<bool> logout() async {
     await _firebaseController.logout();
-    await _storage.delete(key: 'user');
+    await deleteUserFromStorage();
     dio.options.headers.remove('Authorization');
-    _rootStore.logout();
+    sl<RootStore>().logout();
     return true;
   }
 }

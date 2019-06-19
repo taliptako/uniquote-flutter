@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:uniquote_flutter/screens/profile/avatar.dart';
-import 'package:uniquote_flutter/screens/profile/buttons.dart';
+import 'package:uniquote_flutter/ui/profile/avatar.dart';
+import 'package:uniquote_flutter/ui/profile/buttons.dart';
 import 'package:uniquote_flutter/models/user_store.dart';
 
 class ProfileSection extends StatefulWidget {

@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'package:uniquote_flutter/common/common.dart';
 import 'package:uniquote_flutter/models/user_store.dart';
-import 'package:uniquote_flutter/screens/users/followers_screen.dart';
+import 'package:uniquote_flutter/ui/users/followings_screen.dart';
 
-class Followers extends StatelessWidget {
+class Followings extends StatelessWidget {
   final UserStore user;
 
-  const Followers({Key key, this.user}) : super(key: key);
+  const Followings({Key key, this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${user.name} Followers"),
+        title: Text("${user.name} Followings"),
       ),
       bottomNavigationBar: BottomNavigation(),
-      body: FollowersScreen(user: user),
+      body: FollowingsScreen(user: user),
     );
   }
 }

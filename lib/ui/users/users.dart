@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:uniquote_flutter/common/common.dart';
-import 'package:uniquote_flutter/screens/feed.dart';
-import 'package:uniquote_flutter/screens/most_liked.dart';
+import 'package:uniquote_flutter/ui/users/official_users.dart';
+import 'package:uniquote_flutter/ui/users/normal_users.dart';
 
-class Home extends StatelessWidget {
+class Users extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -13,13 +13,13 @@ class Home extends StatelessWidget {
         drawer: DrawerWidget(),
         bottomNavigationBar: BottomNavigation(),
         appBar: AppBar(
-          title: Text('Home'),
+          title: Text('Users'),
           bottom: TabBar(
-            tabs: <Widget>[Tab(text: "Feed"), Tab(text: "Most Liked")],
+            tabs: <Widget>[Tab(text: "Official"), Tab(text: "Normal")],
           ),
         ),
         body: TabBarView(
-          children: [Feed(), MostLiked()],
+          children: [OfficialUsers(), NormalUsers()],
         ),
       ),
     );
