@@ -2,15 +2,10 @@
 
 UniQuote Mobile Application
 
-## Getting Started
+<p style="float:left">
+  <img src="1627737239247.jpeg" width="200">
+  <img src="1627737264671.jpeg" width="200">
+  <img src="1627737278579.jpeg" width="200">
+  <img src="1627737300142.jpeg" width="200">
+</p>
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
